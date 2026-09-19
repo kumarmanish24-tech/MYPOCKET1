@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+import 'ex.dart';
 
 class FloatingNavBarScreen extends StatefulWidget {
   const FloatingNavBarScreen({super.key});
+
+
 
   @override
   State<FloatingNavBarScreen> createState() => _FloatingNavBarScreenState();
@@ -40,8 +44,8 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               decoration: BoxDecoration(
                 color: const Color(0xFF1B1D26), // Dark pill container background
                 borderRadius: BorderRadius.circular(40),
@@ -138,33 +142,46 @@ class _homeuiState extends State<homeui> {
           children: [
             Container(
               width: double.infinity,
-              height: 60,
+              height: 70,
               // color: Colors.white70,
 
 
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 25,),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  SizedBox(height: 35,),
+                  Row(mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(width: 10,),
+                      SizedBox(
+                        width:130,
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            CircleAvatar(
+                              radius:16,
+                              backgroundColor:Colors.white30,
+                              child: CircleAvatar(
+                                radius: 14,
+                               backgroundImage: NetworkImage("https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                              ),
+                            ),
+                            Text("Hi,Manish!",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70),),
 
-                      CircleAvatar(
-                        radius:16,
-                        backgroundColor: Color(0xFFA594F9),
-                        child: CircleAvatar(
-                          radius: 14,
-                          backgroundColor: Colors.blue,
-                        ),
+                          ],
+                        )
+                        ,
                       ),
-                      Text("Hi,Manish!",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70),),
-                      SizedBox(width: 130,),
 
-                      GestureDetector(
-                        child: Icon(Icons.notifications_none,color:  Color(0xFFA594F9) ,),
-                      ),
-                      GestureDetector(
-                        child: Icon(Icons.auto_graph_outlined,color:  Color(0xFFA594F9) ,),
-                      ),
+
+
+                      //
+                      // GestureDetector(
+                      //   child: Icon(Icons.notifications_none,color:  Color(0xFFA594F9) ,),
+                      // ),
+                      // GestureDetector(
+                      //   child: Icon(Icons.auto_graph_outlined,color:  Color(0xFFA594F9) ,),
+                      // ),
 
 
 
@@ -183,40 +200,65 @@ class _homeuiState extends State<homeui> {
 
                   borderRadius: BorderRadius.circular(40.0), // Adjust the double value for more/less curve
                 ),
-                child: Column(
+                child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(width: 5,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: 150,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              // color: Color(0xFFA594F9),
+                              gradient: LinearGradient(
+                                colors: [Color(0xFF2E2C44), Color(0xFF2E2C44)], // Starting and ending colors
+                                begin: Alignment.topLeft,             // Gradient start point
+                                end: Alignment.bottomRight,           // Gradient end point
+                              ),
 
-                          borderRadius: BorderRadius.circular(40.0), // Adjust the double value for more/less curve
-                        ),
-                        child:Column(
-                          children: [
-                            Row(mainAxisAlignment: MainAxisAlignment.end,
+                              border: Border.all(
+                                color: Color(0xFFA594F9), // Border color
+                                width: 2.0,         // Border width
+                                style: BorderStyle.solid,
+                              ),
+                              // Note: Color must be inside BoxDecoration when using decoration
 
+                              borderRadius: BorderRadius.circular(40.0), // Adjust the double value for more/less curve
+                            ),
+                            child:Column(crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20,top: 8),
-                                  child: GestureDetector(
-                                    child: Icon(Icons.remove_red_eye_outlined),
-                                  ),
-                                )
+
+                                Center(child: Text("₹3,500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 30),)),
+
                               ],
                             ),
-                            Row(mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text("₹3,500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 40),),
-                              ],
-                            )
-                          ],
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: Lottie.asset(
+                            'asset/lottiefile/3D Money Icon.json',
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: Lottie.asset(
+                            'asset/lottiefile/Fake 3D vector coin.json',
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+
+                      ],
                     ),
 
                     Padding(
@@ -232,7 +274,7 @@ class _homeuiState extends State<homeui> {
                               borderRadius: BorderRadius.circular(40.0),
 
                               border: Border.all(
-                                color: Colors.white30, // Border color
+                                color: Colors.white, // Border color
                                 width: 2.0,         // Border width
                                 style: BorderStyle.solid,
                               ),// Adjust the double value for more/less curve
@@ -244,7 +286,7 @@ class _homeuiState extends State<homeui> {
 
 
                                 Text("Pocket M",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                                Text("₹500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+                                Text("₹500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
                               ],
                             ),
                           ),
@@ -255,9 +297,10 @@ class _homeuiState extends State<homeui> {
                               // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
 
                               borderRadius: BorderRadius.circular(40.0),
+                              color: Colors.redAccent.withOpacity(0.2),
 
                               border: Border.all(
-                                color: Colors.white30, // Border color
+                                color: Colors.redAccent, // Border color
                                 width: 2.0,         // Border width
                                 style: BorderStyle.solid,
                               ),// Adjust the double value for more/less curve
@@ -269,7 +312,7 @@ class _homeuiState extends State<homeui> {
 
 
                                 Text("Spent",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                                Text("₹1000",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+                                Text("₹1500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
                               ],
                             ),
                           ),
@@ -280,9 +323,10 @@ class _homeuiState extends State<homeui> {
                               // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
 
                               borderRadius: BorderRadius.circular(40.0),
+                              color: Colors.green.withOpacity(0.2),
 
                               border: Border.all(
-                                color: Colors.white30, // Border color
+                                color: Colors.green, // Border color
                                 width: 2.0,         // Border width
                                 style: BorderStyle.solid,
                               ),// Adjust the double value for more/less curve
@@ -294,7 +338,7 @@ class _homeuiState extends State<homeui> {
 
 
                                 Text("Saved",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                                Text("₹1500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+                                Text("₹1000",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
                               ],
                             ),
                           ),
@@ -312,8 +356,8 @@ class _homeuiState extends State<homeui> {
               padding: const EdgeInsets.only(left:20,right: 20,top: 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Latest Transactions",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                  SizedBox(width: 130,),
+                  Text("Latest Transactions",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                  SizedBox(width: 100,),
                   GestureDetector(
                     child:  Text("See All",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
 
@@ -324,7 +368,7 @@ class _homeuiState extends State<homeui> {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 8.0,right: 8,top: 8),
               child: Container(
                 width: double.infinity,
                 height: 80,
@@ -372,98 +416,155 @@ class _homeuiState extends State<homeui> {
                 )
               ),
             ),
-
             Padding(
-              padding: const EdgeInsets.only(left:20,right: 20,bottom: 5),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Daily Limit",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                  SizedBox(width: 130,),
-                  GestureDetector(
-                    child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
+              padding: const EdgeInsets.only(left: 8.0,right: 8),
+              child: Container(
+                  width: 310,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: Colors.white24, // Note: Color must be inside BoxDecoration when using decoration
 
-                  )
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(20), // Rounds both bottom corners
+                    ), // Adjust the double value for more/less curve
+                  ),
 
-                ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
+              child: Container(
+                  width: 300,
+                  height: 3,
+                  decoration: BoxDecoration(
+                    color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
+
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(20), // Rounds both bottom corners
+                    ), // Adjust the double value for more/less curve
+                  ),
+
+              ),
+            ),
+
+
 
             Padding(
               padding: const EdgeInsets.only(left: 8,right: 8),
               child: Container(
                   width: double.infinity,
-                  height: 75,
+                  height: 110,
                   decoration: BoxDecoration(
                     color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
                     borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
                   ),
-                  child:  Row(
+                  child:  Column(
                     children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-
-
-                            Row(
-
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left:20,right: 20,top: 5),
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
 
-
+                                Icon(Icons.watch_later_outlined,size: 15,color: Colors.white54,),
                                 SizedBox(width: 5,),
+                                Text("Daily Limit",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white54,fontSize: 12),),
 
 
+                                SizedBox(width: 115,)
 
 
-                                Row(
-                                  children: [
-                                    Text("₹70",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 25),),
-                                    Text("/120",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                                  ],
-                                ),
-                                SizedBox(width: 10,),
 
 
                               ],
                             ),
-                            SizedBox(width: 200,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: LinearProgressIndicator(
-                                  value: 0.6,
-                                  backgroundColor: Colors.white12,
-                                  color: Colors.white30,
-                                  minHeight: 8.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left:20,right: 20,top: 10),
+                            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+
+                                Container(
+                                  height: 24,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white60, // Note: Color must be inside BoxDecoration when using decoration
+
+                                    borderRadius: BorderRadius.circular(20), // Adjust the double value for more/less curve
+                                  ),
+                                  child: Center(child: Text("₹ 50 Left",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.black87,fontSize: 12),)),
+
+
+
+
+
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
+
+
+
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        width: 30,
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+
+
+                                Row(
+
+                                  children: [
+
+
+                                    SizedBox(width: 5,),
+
+
+
+
+                                    Row(
+                                      children: [
+                                        Text("₹70",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 25),),
+                                        Text("/120",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                                      ],
+                                    ),
+                                    SizedBox(width: 10,),
+
+
+                                  ],
+                                ),
+                                SizedBox(height: 5,),
+                                SizedBox(width: 300,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: LinearProgressIndicator(
+                                      value: 0.6,
+                                      backgroundColor: Colors.white12,
+                                      color: Colors.white30,
+                                      minHeight: 8.0,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                Text("Resets at 12:00 AM",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white54,fontSize: 12),),
+
+                              ],
+                            ),
+                          ),
+
+
+
+                        ],
                       ),
-                      Container(
-                        height: 40,
-                        width: 70,
-                        decoration: BoxDecoration(
-                          color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
-
-                          borderRadius: BorderRadius.circular(20), // Adjust the double value for more/less curve
-                        ),
-                        child: Center(child: Text("₹50",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),)),
-
-
-
-
-
-                      ),
-
                     ],
                   )
               ),
@@ -473,7 +574,7 @@ class _homeuiState extends State<homeui> {
               padding: const EdgeInsets.only(left:20,right: 20,top: 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Quick Action",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                  Text("Quick Action",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
                   SizedBox(width: 130,),
                   GestureDetector(
                     child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
@@ -483,13 +584,14 @@ class _homeuiState extends State<homeui> {
                 ],
               ),
             ),
+
             Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 10,top: 5),
                   child: Container(
-                    width: 165,
-                    height: 100,
+                      width: 165,
+                      height: 70,
                     decoration: BoxDecoration(
                       color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
@@ -499,17 +601,24 @@ class _homeuiState extends State<homeui> {
                   ),
 
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 5),
-                  child: Container(
-                    width: 165,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+                GestureDetector(
+                  onTap: (){
 
-                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                    _showBottomSheet2(context);
+
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10,top: 5),
+                    child: Container(
+                      width: 165,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                        borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                      ),
+                      child:CustomContainericon(icon: Icon(Icons.attach_money,color: Colors.white70,), t1: "Add", t2: "Expance",),
                     ),
-                    child:CustomContainericon(icon: Icon(Icons.attach_money,color: Colors.white70,), t1: "Add", t2: "Expance",),
                   ),
                 ),
               ],
@@ -520,7 +629,7 @@ class _homeuiState extends State<homeui> {
                   padding: const EdgeInsets.only(left: 10,top: 10),
                   child: Container(
                     width: 165,
-                    height: 100,
+                    height: 70,
                     decoration: BoxDecoration(
                       color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
@@ -533,7 +642,7 @@ class _homeuiState extends State<homeui> {
                   padding: const EdgeInsets.only(left: 10,top: 10),
                   child: Container(
                     width: 165,
-                    height: 100,
+                    height: 70,
                     decoration: BoxDecoration(
                       color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
@@ -544,12 +653,157 @@ class _homeuiState extends State<homeui> {
                 ),
               ],
             ),
+
+
           ],
         ),
       ),
     );
   }
+
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.black,
+      context: context,
+      // Shape to round top corners
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          padding: const EdgeInsets.all(20),
+          width: double.infinity,
+          height: 500,
+          color: Colors.blue,
+          child: Column(
+            mainAxisSize: MainAxisSize.min, // Hug content height
+            children: [
+              const Text(
+                'Bottom Sheet Title',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 10),
+              const Text('This is the content inside the bottom sheet.'),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context), // Close the sheet
+                child: const Text('Close'),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showBottomSheet1(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF1E1E1E),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(24),
+        ),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Choose an option',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              ListTile(
+                leading: const Icon(
+                  Icons.edit,
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  'Edit',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {},
+              ),
+
+              ListTile(
+                leading: const Icon(
+                  Icons.delete_outline,
+                  color: Colors.white,
+                ),
+                title: const Text(
+                  'Delete',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {},
+              ),
+
+              const SizedBox(height: 10),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showBottomSheet2(BuildContext context) {
+    showModalBottomSheet(
+
+      context: context,
+      backgroundColor: const Color(0xFF1E1E1E),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(24),
+        ),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade700,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+
+              const SizedBox(height: 20,width: 360,),
+
+
+
+
+
+
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+
+
+
+
+
 }
+
+
+
+
 
 
 class CustomContainericon extends StatelessWidget {
@@ -578,8 +832,8 @@ class CustomContainericon extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 50,
-              width: 50,
+              height: 45,
+              width: 45,
               decoration: BoxDecoration(
                 color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
 
@@ -600,7 +854,7 @@ class CustomContainericon extends StatelessWidget {
 
           ],
         ),
-        SizedBox(width: 5,),
+        SizedBox(width: 30,),
       ],
     );
   }
