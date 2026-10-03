@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mypocket/ui/add_expance.dart';
 import 'ex.dart';
 
 class FloatingNavBarScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
                       decoration: BoxDecoration(
                         // Pill highlight background for the active item
                         color: isSelected
-                            ? const Color(0xFF2E2C44)
+                            ? Colors.white10
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(24),
                       ),
@@ -87,7 +88,7 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
                           Icon(
                             _navItems[index].icon,
                             color: isSelected
-                                ? const Color(0xFFA594F9) // Light purple active icon
+                                ? Colors.white70// Light purple active icon
                                 : Colors.grey[600],        // Grey inactive icon
                             size: 22,
                           ),
@@ -97,7 +98,7 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
                             Text(
                               _navItems[index].label,
                               style: const TextStyle(
-                                color: Color(0xFFA594F9), // Light purple active text
+                                color: Colors.white70, // Light purple active text
                                 fontWeight: FontWeight.w600,
                                 fontSize: 14,
                               ),
@@ -136,65 +137,53 @@ class _homeuiState extends State<homeui> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.black45,
       body: Center(
         child: Column(
           children: [
             Container(
               width: double.infinity,
-              height: 70,
-              // color: Colors.white70,
+              height: 110,
+               // color: Colors.white70,
 
 
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 35,),
-                  Row(mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(width: 10,),
-                      SizedBox(
-                        width:130,
-                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            CircleAvatar(
-                              radius:16,
-                              backgroundColor:Colors.white30,
-                              child: CircleAvatar(
-                                radius: 14,
-                               backgroundImage: NetworkImage("https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-                              ),
-                            ),
-                            Text("Hi,Manish!",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70),),
-
-                          ],
-                        )
-                        ,
-                      ),
-
-
-
-                      //
-                      // GestureDetector(
-                      //   child: Icon(Icons.notifications_none,color:  Color(0xFFA594F9) ,),
-                      // ),
-                      // GestureDetector(
-                      //   child: Icon(Icons.auto_graph_outlined,color:  Color(0xFFA594F9) ,),
-                      // ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 15,),
+                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Good Morning,",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 30),),
+                        Text("Manish!",style: TextStyle(fontWeight: FontWeight.w400,color: Colors.white70,fontSize: 30)),
+                      ],
+                    ),
+                    SizedBox(width: 100,),
+                    Column(
+                      children: [
+                        SizedBox(height: 10,),
+                        CircleAvatar(
+                          radius:20,
+                          backgroundColor:Colors.white30,
+                          child: CircleAvatar(
+                            radius: 18,
+                            backgroundImage: NetworkImage("https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+                          ),
+                        ),
+                      ],
+                    ),
 
 
-
-                    ],
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              )
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8.0,right: 8,top: 5),
               child: Container(
                 width: double.infinity,
-                height: 100,
+                height: 240,
                 decoration: BoxDecoration(
                   color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
@@ -224,7 +213,91 @@ class _homeuiState extends State<homeui> {
                           )
                         ],
                       ),
-                    )
+                    ),
+                    Divider(
+                      color: Colors.black45, // Line color
+                      thickness: 2.0,     // Line thickness
+                      height: 20.0,       // Total height allocated to the widget (includes empty space above/below)
+                      indent: 20.0,       // Empty space before the line starts (left side)
+                      endIndent: 20.0,    // Empty space after the line ends (right side)
+                    ),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(width: 20,),
+                            Icon(Icons.savings,color: Colors.white54,size: 25,),
+                            SizedBox(width: 10,),
+                            Text("Pocket Money",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 15),),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 140,
+                        ),
+                        Text("₹500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 15),),
+                        SizedBox(
+                          width: 10,
+                        ),
+                      ],
+
+
+                    ),
+                    Divider(
+                      color: Colors.black45,  // Line color
+                      thickness: 2.0,     // Line thickness
+                      height: 20.0,       // Total height allocated to the widget (includes empty space above/below)
+                      indent: 20.0,       // Empty space before the line starts (left side)
+                      endIndent: 20.0,    // Empty space after the line ends (right side)
+                    ),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(width: 20,),
+                            Icon(Icons.trending_down,color: Colors.white54,size: 25,),
+                            SizedBox(width: 10,),
+                            Text("Spent",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 15),),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 190,
+                        ),
+                        Text("₹1000",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 15),),
+                        SizedBox(
+                          width: 10,
+                        ),
+                      ],
+
+
+                    ),
+                    Divider(
+                      color: Colors.black45,  // Line color
+                      thickness: 2.0,     // Line thickness
+                      height: 20.0,       // Total height allocated to the widget (includes empty space above/below)
+                      indent: 20.0,       // Empty space before the line starts (left side)
+                      endIndent: 20.0,    // Empty space after the line ends (right side)
+                    ),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(width: 20,),
+                            Icon(Icons.account_balance_wallet,color: Colors.white54,size: 25,),
+                            SizedBox(width: 10,),
+                            Text("Saved",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 15),),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 190,
+                        ),
+                        Text("₹1500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 15),),
+                        SizedBox(
+                          width: 10,
+                        ),
+                      ],
+
+
+                    ),
 
 
 
@@ -235,91 +308,9 @@ class _homeuiState extends State<homeui> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8,top: 20,bottom: 8),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: 95,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
-
-                      borderRadius: BorderRadius.circular(25.0),
-
-                      border: Border.all(
-                        color: Colors.white30, // Border color
-                        width: 2.0,         // Border width
-                        style: BorderStyle.solid,
-                      ),// Adjust the double value for more/less curve
-                    ),
-                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
 
 
 
-                        Text("Pocket M",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                        Text("₹500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 95,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
-
-                      borderRadius: BorderRadius.circular(25.0),
-
-
-                      border: Border.all(
-                        color: Colors.white30, // Border color
-                        width: 2.0,         // Border width
-                        style: BorderStyle.solid,
-                      ),// Adjust the double value for more/less curve
-                    ),
-                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-
-
-
-                        Text("Spent",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                        Text("₹1500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: 95,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
-
-                      borderRadius: BorderRadius.circular(25.0),
-                      color: Colors.green.withOpacity(0.2),
-
-                      border: Border.all(
-                        color: Colors.green, // Border color
-                        width: 2.0,         // Border width
-                        style: BorderStyle.solid,
-                      ),// Adjust the double value for more/less curve
-                    ),
-                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-
-
-
-                        Text("Saved",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                        Text("₹1000",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
-                      ],
-                    ),
-                  ),
-
-                ],
-              ),
-            ),
 
             Padding(
               padding: const EdgeInsets.only(left:20,right: 20,top: 10),
@@ -336,74 +327,121 @@ class _homeuiState extends State<homeui> {
               ),
             ),
 
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 5),
-                  child: Container(
-                      width: 165,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: (){
 
-                        borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => addexpence()));
+
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10,top: 5),
+                      child: Container(
+                        width: 145,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white24,      // Border color
+                            width: 1.0,              // Border thickness
+                          ),
+
+                          color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                          borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                        ),
+                        child:CustomContainericon1(icon: Icon(Icons.add,color: Colors.white70,size: 18,), t1: "Add", t2: "Money",)
                       ),
-                      child: CustomContainericon(icon: Icon(Icons.add,color: Colors.white70,), t1: "Add", t2: "Money",)
+                    ),
                   ),
+                  GestureDetector(
+                    onTap: (){
 
-                ),
-                GestureDetector(
-                  onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => addexpence()));
 
-                    _showBottomSheet2(context);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10,top: 5),
+                      child: Container(
+                        width: 155,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white24,      // Border color
+                            width: 1.0,              // Border thickness
+                          ),
 
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10,top: 5),
-                    child: Container(
-                      width: 165,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+                          color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
-                        borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                          borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                        ),
+                        child:CustomContainericon1(icon: Icon(Icons.attach_money,color: Colors.white70,size: 18,), t1: "Add", t2: "Expance",),
                       ),
-                      child:CustomContainericon(icon: Icon(Icons.attach_money,color: Colors.white70,), t1: "Add", t2: "Expance",),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 10),
-                  child: Container(
-                    width: 165,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+                  GestureDetector(
+                    onTap: (){
 
-                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
-                    ),
-                    child: CustomContainericon(icon: Icon(Icons.currency_exchange,color: Colors.white70,), t1: "Transfer", t2: "Money",),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 10),
-                  child: Container(
-                    width: 165,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => addexpence()));
 
-                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10,top: 5),
+                      child: Container(
+                        width: 135,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white24,      // Border color
+                            width: 1.0,              // Border thickness
+                          ),
+
+                          color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                          borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                        ),
+                        child:CustomContainericon1(icon: Icon(Icons.flag_outlined,color: Colors.white70,size: 18,), t1: "Add", t2: "Goal",),
+                      ),
                     ),
-                    child: CustomContainericon(icon: Icon(Icons.flag_outlined,color: Colors.white70,), t1: "Add", t2: "Goal",),
                   ),
-                ),
-              ],
+                  GestureDetector(
+                    onTap: (){
+
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => addexpence()));
+
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10,top: 5),
+                      child: Container(
+                        width: 175,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white24,      // Border color
+                            width: 1.0,              // Border thickness
+                          ),
+
+                          color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                          borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                        ),
+                        child:CustomContainericon1(icon: Icon(Icons.currency_exchange,color: Colors.white70,size: 18,), t1: "Transfer", t2: "Money",),
+                      ),
+                    ),
+                  ),
+
+
+
+
+
+
+                ],
+              ),
             ),
+
+
 
 
             Padding(
@@ -826,6 +864,63 @@ class CustomContainericon extends StatelessWidget {
           ],
         ),
         SizedBox(width: 30,),
+      ],
+    );
+  }
+}
+
+
+
+class CustomContainericon1 extends StatelessWidget {
+  final Icon icon;
+  final String t1;
+  final String t2;
+
+
+
+  const CustomContainericon1({
+    super.key,
+    required this.icon,
+    required this.t1,
+    required this.t2,
+
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(width: 5,),
+        Column(crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 30,
+              width: 30,
+              decoration: BoxDecoration(
+                color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+
+                borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
+              ),
+              child: icon ,
+
+
+            ),
+          ],
+        ),
+        SizedBox(width: 1,),
+        Row(mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(t1,style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+            SizedBox(width: 5,),
+            Text(t2,style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+
+          ],
+        ),
+        SizedBox(width: 15,),
       ],
     );
   }
