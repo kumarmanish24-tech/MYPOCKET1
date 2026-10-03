@@ -17,8 +17,8 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
   // Icons matching your image layout
   final List<NavItemData> _navItems = [
     NavItemData(icon: Icons.home_rounded, label: 'Home'),
-    NavItemData(icon: Icons.search_rounded, label: 'Search'),
-    NavItemData(icon: Icons.pie_chart_outline_rounded, label: 'Stats'),
+
+    // NavItemData(icon: Icons.pie_chart_outline_rounded, label: 'Stats'),
     NavItemData(icon: Icons.access_time_rounded, label: 'History'),
     NavItemData(icon: Icons.person_outline_rounded, label: 'Profile'),
   ];
@@ -27,8 +27,8 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
   final List<Widget> _pages = const [
     homeui(),
     Center(child: Text('Search Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
-    Center(child: Text('Stats Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
-    Center(child: Text('History Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
+
+    // Center(child: Text('History Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
     Center(child: Text('Profile Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
   ];
 
@@ -194,163 +194,217 @@ class _homeuiState extends State<homeui> {
               padding: const EdgeInsets.only(left: 8.0,right: 8,top: 5),
               child: Container(
                 width: double.infinity,
-                height: 195,
+                height: 100,
                 decoration: BoxDecoration(
                   color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
-                  borderRadius: BorderRadius.circular(40.0), // Adjust the double value for more/less curve
+                  borderRadius: BorderRadius.circular(30.0), // Adjust the double value for more/less curve
                 ),
-                child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(width: 5,),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: 150,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              // color: Color(0xFFA594F9),
-                              gradient: LinearGradient(
-                                colors: [Color(0xFF2E2C44), Color(0xFF2E2C44)], // Starting and ending colors
-                                begin: Alignment.topLeft,             // Gradient start point
-                                end: Alignment.bottomRight,           // Gradient end point
-                              ),
-
-                              border: Border.all(
-                                color: Color(0xFFA594F9), // Border color
-                                width: 2.0,         // Border width
-                                style: BorderStyle.solid,
-                              ),
-                              // Note: Color must be inside BoxDecoration when using decoration
-
-                              borderRadius: BorderRadius.circular(40.0), // Adjust the double value for more/less curve
-                            ),
-                            child:Column(crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-
-                                Center(child: Text("₹3,500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 30),)),
-
-                              ],
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 80,
-                          width: 80,
-                          child: Lottie.asset(
-                            'asset/lottiefile/3D Money Icon.json',
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 80,
-                          width: 80,
-                          child: Lottie.asset(
-                            'asset/lottiefile/Fake 3D vector coin.json',
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-
-                      ],
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    SizedBox(
+                      height: 80,
+                      child: Column(
                         children: [
-                          Container(
-                            width: 95,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
-
-                              borderRadius: BorderRadius.circular(40.0),
-
-                              border: Border.all(
-                                color: Colors.white, // Border color
-                                width: 2.0,         // Border width
-                                style: BorderStyle.solid,
-                              ),// Adjust the double value for more/less curve
-                            ),
-                            child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-
-
-
-                                Text("Pocket M",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                                Text("₹500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              SizedBox(width: 20,),
+                              Icon(Icons.wallet,color: Colors.white54,size: 25,),
+                              SizedBox(width: 10,),
+                              Text("Total Balance",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 15),),
+                            ],
                           ),
-                          Container(
-                            width: 95,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
-
-                              borderRadius: BorderRadius.circular(40.0),
-                              color: Colors.redAccent.withOpacity(0.2),
-
-                              border: Border.all(
-                                color: Colors.redAccent, // Border color
-                                width: 2.0,         // Border width
-                                style: BorderStyle.solid,
-                              ),// Adjust the double value for more/less curve
-                            ),
-                            child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-
-
-
-                                Text("Spent",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                                Text("₹1500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: 95,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
-
-                              borderRadius: BorderRadius.circular(40.0),
-                              color: Colors.green.withOpacity(0.2),
-
-                              border: Border.all(
-                                color: Colors.green, // Border color
-                                width: 2.0,         // Border width
-                                style: BorderStyle.solid,
-                              ),// Adjust the double value for more/less curve
-                            ),
-                            child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-
-
-
-                                Text("Saved",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                                Text("₹1000",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
-                              ],
-                            ),
-                          ),
-
+                          SizedBox(height: 5,),
+                          Row(
+                            children: [
+                              SizedBox(width: 20,),
+                              Text("₹3,500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 35),),
+                            ],
+                          )
                         ],
                       ),
-                    ),
+                    )
+
+
+
+
 
                   ]
                 ),
               ),
             ),
+
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8,top: 20,bottom: 8),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: 95,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
+
+                      borderRadius: BorderRadius.circular(25.0),
+
+                      border: Border.all(
+                        color: Colors.white30, // Border color
+                        width: 2.0,         // Border width
+                        style: BorderStyle.solid,
+                      ),// Adjust the double value for more/less curve
+                    ),
+                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+
+
+                        Text("Pocket M",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                        Text("₹500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: 95,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
+
+                      borderRadius: BorderRadius.circular(25.0),
+
+
+                      border: Border.all(
+                        color: Colors.white30, // Border color
+                        width: 2.0,         // Border width
+                        style: BorderStyle.solid,
+                      ),// Adjust the double value for more/less curve
+                    ),
+                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+
+
+                        Text("Spent",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                        Text("₹1500",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: 95,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      // color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
+
+                      borderRadius: BorderRadius.circular(25.0),
+                      color: Colors.green.withOpacity(0.2),
+
+                      border: Border.all(
+                        color: Colors.green, // Border color
+                        width: 2.0,         // Border width
+                        style: BorderStyle.solid,
+                      ),// Adjust the double value for more/less curve
+                    ),
+                    child:Column(mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+
+
+
+                        Text("Saved",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                        Text("₹1000",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                      ],
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only(left:20,right: 20,top: 10),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Quick Action",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                  SizedBox(width: 130,),
+                  GestureDetector(
+                    child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
+
+                  )
+
+                ],
+              ),
+            ),
+
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10,top: 5),
+                  child: Container(
+                      width: 165,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                        borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                      ),
+                      child: CustomContainericon(icon: Icon(Icons.add,color: Colors.white70,), t1: "Add", t2: "Money",)
+                  ),
+
+                ),
+                GestureDetector(
+                  onTap: (){
+
+                    _showBottomSheet2(context);
+
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10,top: 5),
+                    child: Container(
+                      width: 165,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                        borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                      ),
+                      child:CustomContainericon(icon: Icon(Icons.attach_money,color: Colors.white70,), t1: "Add", t2: "Expance",),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10,top: 10),
+                  child: Container(
+                    width: 165,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                    ),
+                    child: CustomContainericon(icon: Icon(Icons.currency_exchange,color: Colors.white70,), t1: "Transfer", t2: "Money",),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10,top: 10),
+                  child: Container(
+                    width: 165,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
+
+                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+                    ),
+                    child: CustomContainericon(icon: Icon(Icons.flag_outlined,color: Colors.white70,), t1: "Add", t2: "Goal",),
+                  ),
+                ),
+              ],
+            ),
+
 
             Padding(
               padding: const EdgeInsets.only(left:20,right: 20,top: 10),
@@ -570,89 +624,6 @@ class _homeuiState extends State<homeui> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left:20,right: 20,top: 10),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Quick Action",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
-                  SizedBox(width: 130,),
-                  GestureDetector(
-                    child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
-
-                  )
-
-                ],
-              ),
-            ),
-
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 5),
-                  child: Container(
-                      width: 165,
-                      height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
-
-                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
-                    ),
-                    child: CustomContainericon(icon: Icon(Icons.add,color: Colors.white70,), t1: "Add", t2: "Money",)
-                  ),
-
-                ),
-                GestureDetector(
-                  onTap: (){
-
-                    _showBottomSheet2(context);
-
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10,top: 5),
-                    child: Container(
-                      width: 165,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
-
-                        borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
-                      ),
-                      child:CustomContainericon(icon: Icon(Icons.attach_money,color: Colors.white70,), t1: "Add", t2: "Expance",),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 10),
-                  child: Container(
-                    width: 165,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
-
-                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
-                    ),
-                    child: CustomContainericon(icon: Icon(Icons.currency_exchange,color: Colors.white70,), t1: "Transfer", t2: "Money",),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 10),
-                  child: Container(
-                    width: 165,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
-
-                      borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
-                    ),
-                    child: CustomContainericon(icon: Icon(Icons.flag_outlined,color: Colors.white70,), t1: "Add", t2: "Goal",),
-                  ),
-                ),
-              ],
-            ),
 
 
           ],
