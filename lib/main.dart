@@ -31,9 +31,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+          scaffoldBackgroundColor: Colors.black, // Fixes page transition background
+          canvasColor: Colors.black,             // Prevents route canvas flashing
+          colorScheme: const ColorScheme.dark(),  // Sets default dark palette
 
 
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+
       ),
       home: FloatingNavBarScreen(),
     );

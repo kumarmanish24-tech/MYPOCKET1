@@ -165,7 +165,7 @@ class _homeuiState extends State<homeui> {
                         SizedBox(height: 10,),
                         CircleAvatar(
                           radius:20,
-                          backgroundColor:Colors.white30,
+                          backgroundColor:Colors.white70,
                           child: CircleAvatar(
                             radius: 18,
                             backgroundImage: NetworkImage("https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
@@ -180,7 +180,7 @@ class _homeuiState extends State<homeui> {
               )
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8,top: 5),
+              padding: const EdgeInsets.only(left: 8.0,right: 8,top: 20),
               child: Container(
                 width: double.infinity,
                 height: 240,
@@ -332,11 +332,7 @@ class _homeuiState extends State<homeui> {
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: (){
-
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => addexpence()));
-
-                    },
+                    onTap:_showBottomSheet2,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10,top: 5),
                       child: Container(
@@ -670,134 +666,22 @@ class _homeuiState extends State<homeui> {
     );
   }
 
-  void _showBottomSheet(BuildContext context) {
+
+  void _showBottomSheet2() {
     showModalBottomSheet(
-      backgroundColor: Colors.black,
       context: context,
-      // Shape to round top corners
+      // The background color of the glass/barrier behind the bottom sheet
+      barrierColor: Colors.black.withOpacity(0.6),
+      // The actual background color of the sheet
+      backgroundColor: const Color(0xFF1E1E1E),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       builder: (BuildContext context) {
         return Container(
-          padding: const EdgeInsets.all(20),
-          width: double.infinity,
-          height: 500,
-          color: Colors.blue,
-          child: Column(
-            mainAxisSize: MainAxisSize.min, // Hug content height
-            children: [
-              const Text(
-                'Bottom Sheet Title',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              const Text('This is the content inside the bottom sheet.'),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context), // Close the sheet
-                child: const Text('Close'),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+          height: 350,
+          padding: const EdgeInsets.all(20.0),
 
-  void _showBottomSheet1(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: const Color(0xFF1E1E1E),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(24),
-        ),
-      ),
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Choose an option',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-
-              const SizedBox(height: 20),
-
-              ListTile(
-                leading: const Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ),
-                title: const Text(
-                  'Edit',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onTap: () {},
-              ),
-
-              ListTile(
-                leading: const Icon(
-                  Icons.delete_outline,
-                  color: Colors.white,
-                ),
-                title: const Text(
-                  'Delete',
-                  style: TextStyle(color: Colors.white),
-                ),
-                onTap: () {},
-              ),
-
-              const SizedBox(height: 10),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  void _showBottomSheet2(BuildContext context) {
-    showModalBottomSheet(
-
-      context: context,
-      backgroundColor: const Color(0xFF1E1E1E),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(24),
-        ),
-      ),
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade700,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-
-              const SizedBox(height: 20,width: 360,),
-
-
-
-
-
-
-            ],
-          ),
         );
       },
     );
