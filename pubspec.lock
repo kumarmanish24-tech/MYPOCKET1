@@ -195,6 +195,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.5.2"
+  reel_text:
+    dependency: "direct main"
+    description:
+      name: reel_text
+      sha256: "88a26a08bb81554e0c3466d2579fa91619c85977be804b32264fbbcde487cb75"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.1"
   sky_engine:
     dependency: transitive
     description: flutter

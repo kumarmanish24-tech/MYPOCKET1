@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mypocket/ui/add_expance.dart';
+import 'package:mypocket/ui/ex1.dart';
 import 'ex.dart';
 
 class FloatingNavBarScreen extends StatefulWidget {
@@ -380,7 +381,7 @@ class _homeuiState extends State<homeui> {
                   GestureDetector(
                     onTap: (){
 
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => addexpence()));
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) => SaveConfirmationAnimation()));
 
                     },
                     child: Padding(
@@ -784,7 +785,7 @@ class CustomContainericon1 extends StatelessWidget {
               height: 30,
               width: 30,
               decoration: BoxDecoration(
-                color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+                color: Colors.white10, // Note: Color must be inside BoxDecoration when using decoration
 
                 borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
               ),
