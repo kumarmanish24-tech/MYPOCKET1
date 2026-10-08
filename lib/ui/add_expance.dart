@@ -1663,7 +1663,7 @@ class _addexpenceState extends State<addexpence> {
                       },
                       icon: const Icon(Icons.clear),
                       style: IconButton.styleFrom(
-                        backgroundColor: Colors.black54, // Background color
+                        backgroundColor: Color(0xFF393939), // Background color
                         foregroundColor: Colors.white,
                         // Icon color
                       ),

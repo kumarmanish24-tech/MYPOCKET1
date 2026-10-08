@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mypocket/ui/add_expance.dart';
 import 'package:mypocket/ui/ex1.dart';
+import 'package:mypocket/ui/view_expance.dart';
 import 'ex.dart';
 
 class FloatingNavBarScreen extends StatefulWidget {
@@ -26,12 +27,31 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
   ];
 
   // Dummy pages for demonstration
-  final List<Widget> _pages = const [
-    homeui(),
-    Center(child: Text('Search Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
+  late final List<Widget> _pages = [
+    const homeui(),
+    Center(child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Center(
+          child: IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => view_expance()));
+          }, icon: const Icon(Icons.face)),
+        )
+      ],
+    )),
+    Center(child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Center(
+          child: IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => DynamicSegmentedButtonExample()));
+          }, icon: const Icon(Icons.face)),
+        )
+      ],
+    )),
 
-    // Center(child: Text('History Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
-    Center(child: Text('Profile Screen', style: TextStyle(color: Colors.white, fontSize: 20))),
+
+
   ];
 
   @override
@@ -126,7 +146,7 @@ class NavItemData {
   NavItemData({required this.icon, required this.label});
 }
 
-
+// -------------------------------homeui----------------------------
 class homeui extends StatefulWidget {
   const homeui({super.key});
 
@@ -695,11 +715,6 @@ class _homeuiState extends State<homeui> {
 
 }
 
-
-
-
-
-
 class CustomContainericon extends StatelessWidget {
   final Icon icon;
   final String t1;
@@ -753,8 +768,6 @@ class CustomContainericon extends StatelessWidget {
     );
   }
 }
-
-
 
 class CustomContainericon1 extends StatelessWidget {
   final Icon icon;
@@ -810,3 +823,5 @@ class CustomContainericon1 extends StatelessWidget {
     );
   }
 }
+
+// -------------------------------His----------------------------

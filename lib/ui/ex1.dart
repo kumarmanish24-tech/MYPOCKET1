@@ -1,298 +1,689 @@
 import 'package:flutter/material.dart';
 
 
+enum ContentType { today, thisweak, thisMonth,thisYear }
 
-// 1. Category Data Model
-class CategoryItem {
-  final String title;
-  final IconData icon;
-  final Color color;
 
-  const CategoryItem({
-    required this.title,
-    required this.icon,
-    required this.color,
-  });
-}
-
-// 2. Main Screen Widget
-class CategoryPickerScreen extends StatefulWidget {
-  const CategoryPickerScreen({super.key});
+class DynamicSegmentedButtonExample extends StatefulWidget {
+  const DynamicSegmentedButtonExample({super.key});
 
   @override
-  State<CategoryPickerScreen> createState() => _CategoryPickerScreenState();
+  State<DynamicSegmentedButtonExample> createState() =>
+      _DynamicSegmentedButtonExampleState();
 }
 
-class _CategoryPickerScreenState extends State<CategoryPickerScreen> {
-  // Store the user's selected category
-  CategoryItem? _selectedCategory;
+class _DynamicSegmentedButtonExampleState
+    extends State<DynamicSegmentedButtonExample> {
+  ContentType _selectedType = ContentType.today;
 
-  // List of all categories
-  final List<CategoryItem> _categories = const [
-    CategoryItem(
-      title: 'Food & Dining',
-      icon: Icons.restaurant,
-      color: Colors.orange,
-    ),
-    CategoryItem(
-      title: 'Transport',
-      icon: Icons.directions_bus,
-      color: Colors.blue,
-    ),
-    CategoryItem(
-      title: 'Shopping',
-      icon: Icons.shopping_bag,
-      color: Colors.purple,
-    ),
-    CategoryItem(
-      title: 'Housing',
-      icon: Icons.home,
-      color: Colors.amber,
-    ),
-    CategoryItem(
-      title: 'Education',
-      icon: Icons.school,
-      color: Colors.indigo,
-    ),
-    CategoryItem(
-      title: 'Health & Medical',
-      icon: Icons.medical_services,
-      color: Colors.red,
-    ),
-    CategoryItem(
-      title: 'Entertainment',
-      icon: Icons.movie,
-      color: Colors.pink,
-    ),
-    CategoryItem(
-      title: 'Bills & Utilities',
-      icon: Icons.receipt_long,
-      color: Colors.teal,
-    ),
-    CategoryItem(
-      title: 'Other',
-      icon: Icons.more_horiz,
-      color: Colors.grey,
-    ),
-  ];
-
-  // 3. Open Modal Bottom Sheet
-  void _openCategoryBottomSheet(BuildContext context) async {
-    final CategoryItem? result = await showModalBottomSheet<CategoryItem>(
-      context: context,
-      backgroundColor: const Color(0xFF323232),
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Top drag indicator bar
-              Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const Text(
-                'Select Category',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Category options list
-              Flexible(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _categories.length,
-                  separatorBuilder: (context, index) => const Divider(
-                    color: Colors.white12,
-                    height: 1,
-                    indent: 20,
-                    endIndent: 20,
-                  ),
-                  itemBuilder: (context, index) {
-                    final category = _categories[index];
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: category.color.withOpacity(0.15),
-                        child: Icon(category.icon, color: category.color),
-                      ),
-                      title: Text(
-                        category.title,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      onTap: () {
-                        // Pass selected item back and close bottom sheet
-                        Navigator.pop(context, category);
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-
-    // 4. Update state when item selected
-    if (result != null) {
-      setState(() {
-        _selectedCategory = result;
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF1E1E1E),
-      appBar: AppBar(
-        title: const Text('Category Selector'),
-        backgroundColor: const Color(0xFF323232),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Selected Category Display
-            if (_selectedCategory != null)
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 12,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF323232),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
+  // Map each enum value to its corresponding content widget
+  Widget _buildContent(ContentType type) {
+    switch (type) {
+      case ContentType.today:
+        return  Card(
+          key: ValueKey('today'),
+          color: Color(0xFF323232),
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    CircleAvatar(
-                      backgroundColor:
-                      _selectedCategory!.color.withOpacity(0.2),
-                      radius: 18,
-                      child: Icon(
-                        _selectedCategory!.icon,
-                        color: _selectedCategory!.color,
-                        size: 20,
+                    Text("Total Expenses"),
+                    Text("1,730",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                    Row(
+                      children: [
+                        Text("vs Yesterday"),
+                        SizedBox(width: 5,),
+                        Card(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                            child: Text("18%",style: TextStyle(color: Colors.black),),
+                          ) ,
+                        )
+
+                      ],
+                    ),
+                  ],
+                ),
+                VerticalDivider(
+                  color: Colors.grey,
+                  thickness: 2,       // Line thickness
+                  width: 32,          // Horizontal space occupied by the widget
+                  indent: 8,          // Top padding/space
+                  endIndent: 8,       // Bottom padding/space
+                ),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Food"),
+
+                        ],
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    Text(
-                      _selectedCategory!.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Transort"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.pinkAccent,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Shopping"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Spectacle"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Other"),
+
+                        ],
                       ),
                     ),
                   ],
                 ),
-              )
-            else
-              const Text(
-                'No category selected',
-                style: TextStyle(color: Colors.grey, fontSize: 16),
-              ),
-            const SizedBox(height: 24),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("43%"),
+                    Text("65%"),
+                    Text("6%"),
+                    Text("33%"),
+                    Text("9%"),
 
-            // Trigger Button
-            ElevatedButton.icon(
-              onPressed: () => _openCategoryBottomSheet(context),
-              icon: const Icon(Icons.category),
-              label: const Text('Select Category'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF323232),
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 14,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
+                  ],
+                )
+              ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-
-class TimePickerExample extends StatefulWidget {
-  const TimePickerExample({super.key});
-
-  @override
-  State<TimePickerExample> createState() => _TimePickerExampleState();
-}
-
-class _TimePickerExampleState extends State<TimePickerExample> {
-  // Store the selected time
-  TimeOfDay? _selectedTime;
-
-  // Function to trigger the time picker dialog
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: _selectedTime ?? TimeOfDay.now(),
-      // Force 24-hour mode or 12-hour mode if needed:
-      builder: (BuildContext context, Widget? child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
-          child: child!,
+          ),
         );
-      },
-    );
+      case ContentType.thisweak:
+        return  Card(
+          key: ValueKey('weak'),
+          color: Color(0xFF323232),
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Total Expenses"),
+                    Text("987",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                    Row(
+                      children: [
+                        Text("vs last Weak"),
+                        SizedBox(width: 5,),
+                        Card(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                            child: Text("15%",style: TextStyle(color: Colors.black),),
+                          ) ,
+                        )
 
-    if (picked != null && picked != _selectedTime) {
-      setState(() {
-        _selectedTime = picked;
-      });
+                      ],
+                    ),
+                  ],
+                ),
+                VerticalDivider(
+                  color: Colors.grey,
+                  thickness: 2,       // Line thickness
+                  width: 32,          // Horizontal space occupied by the widget
+                  indent: 8,          // Top padding/space
+                  endIndent: 8,       // Bottom padding/space
+                ),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Food"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Transort"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.pinkAccent,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Shopping"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Spectacle"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Other"),
+
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("34%"),
+                    Text("6%"),
+                    Text("54%"),
+                    Text("9%"),
+                    Text("3%"),
+
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      case ContentType.thisMonth:
+        return  Card(
+          key: ValueKey('month'),
+          color: Color(0xFF323232),
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Total Expenses"),
+                    Text("875",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                    Row(
+                      children: [
+                        Text("vs last month"),
+                        SizedBox(width: 5,),
+                        Card(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                            child: Text("12%",style: TextStyle(color: Colors.black),),
+                          ) ,
+                        )
+
+                      ],
+                    ),
+                  ],
+                ),
+                VerticalDivider(
+                  color: Colors.grey,
+                  thickness: 2,       // Line thickness
+                  width: 32,          // Horizontal space occupied by the widget
+                  indent: 8,          // Top padding/space
+                  endIndent: 8,       // Bottom padding/space
+                ),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Food"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Transort"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.pinkAccent,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Shopping"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Spectacle"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Other"),
+
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("43%"),
+                    Text("65%"),
+                    Text("6%"),
+                    Text("33%"),
+                    Text("9%"),
+
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      case ContentType.thisYear:
+        return  Card(
+          key: ValueKey('year'),
+          color: Color(0xFF323232),
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: Row(
+              children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Total Expenses"),
+                    Text("654",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                    Row(
+                      children: [
+                        Text("vs last year"),
+                        SizedBox(width: 5,),
+                        Card(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                            child: Text("12%",style: TextStyle(color: Colors.black),),
+                          ) ,
+                        )
+
+                      ],
+                    ),
+                  ],
+                ),
+                VerticalDivider(
+                  color: Colors.grey,
+                  thickness: 2,       // Line thickness
+                  width: 32,          // Horizontal space occupied by the widget
+                  indent: 8,          // Top padding/space
+                  endIndent: 8,       // Bottom padding/space
+                ),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Food"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Transort"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.pinkAccent,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Shopping"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Spectacle"),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 15,
+                            height: 15,
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              shape: BoxShape.circle,
+                            ),
+
+                          ),
+                          SizedBox(width: 10,),
+                          Text("Other"),
+
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("4%"),
+                    Text("85%"),
+                    Text("1%"),
+                    Text("3%"),
+                    Text("9%"),
+
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Time Picker Example')),
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Expenses'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              _selectedTime == null
-                  ? 'No time selected'
-                  : 'Selected Time: ${_selectedTime!.format(context)}',
-              style: const TextStyle(fontSize: 20),
+            // Segmented Button Navigation
+            SegmentedButton<ContentType>(
+              showSelectedIcon: false,
+              segments: const [
+                ButtonSegment(
+                  value: ContentType.today,
+                  label: Text('Today'),
+
+                ),
+                ButtonSegment(
+                  value: ContentType.thisweak,
+                  label: Text('Weakly'),
+
+                ),
+                ButtonSegment(
+                  value: ContentType.thisMonth,
+                  label: Text('Monthly'),
+
+                ),
+                ButtonSegment(
+                  value: ContentType.thisYear,
+                  label: Text('Yearly'),
+
+                ),
+              ],
+              selected: {_selectedType},
+              onSelectionChanged: (Set<ContentType> newSelection) {
+                setState(() {
+                  _selectedType = newSelection.first;
+                });
+              },
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => _selectTime(context),
-              child: const Text('Choose Time'),
+            const SizedBox(height: 12),
+
+            // Dynamic Content Area with Fade Transition
+            Expanded(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: _buildContent(_selectedType),
+              ),
             ),
+            Spacer(),
+            Container(
+              height: 300,
+            )
           ],
         ),
       ),
     );
   }
 }
-
-
-
-
