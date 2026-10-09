@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 
+class CategoryItem {
+  final String title;
+  final IconData icon;
+  final Color color;
+  final String price;
 
-enum ContentType { today, thisweak, thisMonth,thisYear }
+  const CategoryItem({
+    required this.title,
+    required this.price,
+    required this.icon,
+    required this.color,
+  });
+}
+
+
+enum ContentType { today, thisWeek, thisMonth,thisYear }
 
 
 class DynamicSegmentedButtonExample extends StatefulWidget {
@@ -14,6 +28,150 @@ class DynamicSegmentedButtonExample extends StatefulWidget {
 
 class _DynamicSegmentedButtonExampleState
     extends State<DynamicSegmentedButtonExample> {
+
+  CategoryItem? _selectedCategory;
+
+  final List<CategoryItem> _paymentMethods = const [
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+
+
+  ];
+  void _openCategoryBottomSheetforplayment(BuildContext context) async {
+    final CategoryItem? result = await showModalBottomSheet<CategoryItem>(
+      context: context,
+      backgroundColor: const Color(0xFF252525),
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        maxHeight:
+        MediaQuery.of(context).size.height *
+            0.55, // Caps it at 75% of screen height
+      ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Top drag indicator bar
+              Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const Text(
+                'Select Payment Method',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 12),
+              // Category options list
+              Flexible(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _paymentMethods.length,
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Colors.white12,
+                    height: 1,
+                    indent: 20,
+                    endIndent: 20,
+                  ),
+                  itemBuilder: (context, index) {
+                    final category = _paymentMethods[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: category.color.withOpacity(0.15),
+                        child: Icon(category.icon, color: category.color),
+                      ),
+                      title: Text(
+                        category.title,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      trailing: Text(category.price)
+
+
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    // 4. Update state when item selected
+    if (result != null) {
+      setState(() {
+        _selectedCategory = result;
+      });
+    }
+  }
+
+
+
   ContentType _selectedType = ContentType.today;
 
   // Map each enum value to its corresponding content widget
@@ -21,6 +179,9 @@ class _DynamicSegmentedButtonExampleState
     switch (type) {
       case ContentType.today:
         return  Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
+          ),
           key: ValueKey('today'),
           color: Color(0xFF323232),
           child: Padding(
@@ -32,7 +193,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("1,730",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 1,730",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(width: 83,
@@ -173,8 +334,11 @@ class _DynamicSegmentedButtonExampleState
             ),
           ),
         );
-      case ContentType.thisweak:
+      case ContentType.thisWeek:
         return  Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
+          ),
           key: ValueKey('weak'),
           color: Color(0xFF323232),
           child: Padding(
@@ -186,7 +350,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("987",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 987",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(width: 83,
@@ -329,6 +493,9 @@ class _DynamicSegmentedButtonExampleState
         );
       case ContentType.thisMonth:
         return  Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
+          ),
           key: ValueKey('month'),
           color: Color(0xFF323232),
           child: Padding(
@@ -340,7 +507,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("875",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 875",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(
@@ -483,6 +650,9 @@ class _DynamicSegmentedButtonExampleState
         );
       case ContentType.thisYear:
         return  Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
+          ),
           key: ValueKey('year'),
           color: Color(0xFF323232),
           child: Padding(
@@ -494,7 +664,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("654",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 654",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(width: 83,
@@ -650,52 +820,195 @@ class _DynamicSegmentedButtonExampleState
           children: [
             // Segmented Button Navigation
             const SizedBox(height: 6),
-            SegmentedButton<ContentType>(
-              showSelectedIcon: false,
-              segments: const [
-                ButtonSegment(
-                  value: ContentType.today,
-                  label: Text('Today'),
-
+            Row(
+              children: [
+                SizedBox(width: 9,),
+                SegmentedButton<ContentType>(
+                  showSelectedIcon: false,
+                  segments: const [
+                    ButtonSegment<ContentType>(
+                      value: ContentType.today,
+                      label: Text('Today'),
+                    ),
+                    ButtonSegment<ContentType>(
+                      value: ContentType.thisWeek,
+                      label: Text('Weekly'),
+                    ),
+                    ButtonSegment<ContentType>(
+                      value: ContentType.thisMonth,
+                      label: Text('Monthly'),
+                    ),
+                    ButtonSegment<ContentType>(
+                      value: ContentType.thisYear,
+                      label: Text('Yearly'),
+                    ),
+                  ],
+                  selected: {_selectedType},
+                  onSelectionChanged: (Set<ContentType> newSelection) {
+                    setState(() {
+                      _selectedType = newSelection.first;
+                    });
+                  },
                 ),
-                ButtonSegment(
-                  value: ContentType.thisweak,
-                  label: Text('Weakly'),
-
-                ),
-                ButtonSegment(
-                  value: ContentType.thisMonth,
-                  label: Text('Monthly'),
-
-                ),
-                ButtonSegment(
-                  value: ContentType.thisYear,
-                  label: Text('Yearly'),
-
-                ),
+                IconButton(onPressed: (){
+                  _openCategoryBottomSheetforplayment(context);
+                }, icon: Icon(Icons.more_vert))
               ],
-              selected: {_selectedType},
-              onSelectionChanged: (Set<ContentType> newSelection) {
-                setState(() {
-                  _selectedType = newSelection.first;
-                });
-              },
             ),
             const SizedBox(height: 6),
 
             // Dynamic Content Area with Fade Transition
-            Expanded(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: _buildContent(_selectedType),
+            SizedBox(height: 150,
+              child: Expanded(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: _buildContent(_selectedType),
+                ),
               ),
             ),
-            Spacer(),
+            SizedBox(height: 6,),
             Container(
-              height: 300,
-            )
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Color(0xFF323232),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomRoundedCardforsecondcard(icon: Icon(Icons.shopping_cart_rounded,color: Colors.black,), t1: 'shopping', t2: '₹ 200',),
+                  VerticalDivider(
+                    color: Colors.black26,
+                    thickness: 2,       // Line thickness
+                            // Horizontal space occupied by the widget
+                    indent: 8,          // Top padding/space
+                    endIndent: 8,       // Bottom padding/space
+                  ),
+                  CustomRoundedCardforsecondcard(icon: Icon(Icons.fastfood_rounded,color: Colors.black,), t1: 'food', t2: '₹ 751',),
+                  VerticalDivider(
+                    color: Colors.black26,
+                    thickness: 2,       // Line thickness
+                    // Horizontal space occupied by the widget
+                    indent: 8,          // Top padding/space
+                    endIndent: 8,       // Bottom padding/space
+                  ),
+                  CustomRoundedCardforsecondcard(icon: Icon(Icons.train,color: Colors.black,), t1: 'transport', t2: '₹ 432',),
+                  VerticalDivider(
+                    color: Colors.black26,
+                    thickness: 2,       // Line thickness
+                    // Horizontal space occupied by the widget
+                    indent: 8,          // Top padding/space
+                    endIndent: 8,       // Bottom padding/space
+                  ),
+                  CustomRoundedCardforsecondcard(icon: Icon(Icons.more_horiz,color: Colors.black,), t1: 'other', t2: '₹ 650',),
+
+
+
+
+
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.only( top: 5,left: 10),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Recent expenses",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                  SizedBox(width: 130,),
+                  GestureDetector(
+                    child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
+
+                  )
+
+                ],
+              ),
+            ),
+            SizedBox(height: 5,),
+            Container(
+              width: double.infinity,
+              height: 350,
+              decoration: BoxDecoration(
+                color: Color(0xFF323232),
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Flexible(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _paymentMethods.length,
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Colors.white12,
+                    height: 8,
+                    indent: 20,
+                    endIndent: 20,
+                  ),
+                  itemBuilder: (context, index) {
+                    final category = _paymentMethods[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: category.color.withOpacity(0.15),
+                        child: Icon(category.icon, color: category.color),
+                      ),
+                      title: Text(
+                        category.title,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+
+                        trailing: Text(category.price, style: const TextStyle(color: Colors.white,fontSize: 15),)
+                    );
+                  },
+                ),
+              ),
+
+            ),
+
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+
+class CustomRoundedCardforsecondcard extends StatelessWidget {
+  final Icon icon;
+  final String t1;
+  final String t2;
+
+
+  const CustomRoundedCardforsecondcard({
+    super.key,
+    required this.icon,
+    required this.t1,
+    required this.t2,
+
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return   SizedBox(
+      height: 90,
+      width: 60,
+      child: Column(
+        children: [
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.0), // Adjust the value for more/less roundness
+            ),
+
+             color: Colors.white,
+              child: SizedBox(
+                  height: 40,
+                  width: 40,
+
+                  child: icon),
+
+          ),
+          Text(t1),
+          Text(t2),
+        ],
       ),
     );
   }
