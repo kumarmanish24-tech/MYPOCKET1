@@ -27,26 +27,29 @@ class _DynamicSegmentedButtonExampleState
             padding: EdgeInsets.all(15.0),
             child: Row(
               children: [
-                Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Total Expenses"),
-                    Text("1,730",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
-                    Row(
-                      children: [
-                        Text("vs Yesterday"),
-                        SizedBox(width: 5,),
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
-                            child: Text("18%",style: TextStyle(color: Colors.black),),
-                          ) ,
-                        )
+                SizedBox(width: 140,
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Total Expenses"),
+                      Text("1,730",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Row(
+                        children: [
+                          SizedBox(width: 83,
+                              child: Text("vs Yesterday")),
 
-                      ],
-                    ),
-                  ],
+                          Card(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                              child: Text("18%",style: TextStyle(color: Colors.black),),
+                            ) ,
+                          )
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 VerticalDivider(
                   color: Colors.grey,
@@ -178,26 +181,29 @@ class _DynamicSegmentedButtonExampleState
             padding: EdgeInsets.all(15.0),
             child: Row(
               children: [
-                Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Total Expenses"),
-                    Text("987",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
-                    Row(
-                      children: [
-                        Text("vs last Weak"),
-                        SizedBox(width: 5,),
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
-                            child: Text("15%",style: TextStyle(color: Colors.black),),
-                          ) ,
-                        )
+                SizedBox(width: 140,
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Total Expenses"),
+                      Text("987",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Row(
+                        children: [
+                          SizedBox(width: 83,
+                              child: Text("vs last Weak")),
 
-                      ],
-                    ),
-                  ],
+                          Card(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                              child: Text("15%",style: TextStyle(color: Colors.black),),
+                            ) ,
+                          )
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 VerticalDivider(
                   color: Colors.grey,
@@ -329,26 +335,29 @@ class _DynamicSegmentedButtonExampleState
             padding: EdgeInsets.all(15.0),
             child: Row(
               children: [
-                Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Total Expenses"),
-                    Text("875",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
-                    Row(
-                      children: [
-                        Text("vs last month"),
-                        SizedBox(width: 5,),
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
-                            child: Text("12%",style: TextStyle(color: Colors.black),),
-                          ) ,
-                        )
+                SizedBox(width: 140,
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Total Expenses"),
+                      Text("875",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Row(
+                        children: [
+                          SizedBox(
+                              width: 83,child: Text("vs last month")),
 
-                      ],
-                    ),
-                  ],
+                          Card(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                              child: Text("12%",style: TextStyle(color: Colors.black),),
+                            ) ,
+                          )
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 VerticalDivider(
                   color: Colors.grey,
@@ -480,26 +489,29 @@ class _DynamicSegmentedButtonExampleState
             padding: EdgeInsets.all(15.0),
             child: Row(
               children: [
-                Column(crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Total Expenses"),
-                    Text("654",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
-                    Row(
-                      children: [
-                        Text("vs last year"),
-                        SizedBox(width: 5,),
-                        Card(
-                          color: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
-                            child: Text("12%",style: TextStyle(color: Colors.black),),
-                          ) ,
-                        )
+                SizedBox(width: 140,
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Total Expenses"),
+                      Text("654",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Row(
+                        children: [
+                          SizedBox(width: 83,
+                              child: Text("vs last year")),
 
-                      ],
-                    ),
-                  ],
+                          Card(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 12.0,right: 12,top: 4,bottom: 4),
+                              child: Text("12%",style: TextStyle(color: Colors.black),),
+                            ) ,
+                          )
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 VerticalDivider(
                   color: Colors.grey,
@@ -633,10 +645,11 @@ class _DynamicSegmentedButtonExampleState
         title: const Text('Expenses'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 8.0,right: 8),
         child: Column(
           children: [
             // Segmented Button Navigation
+            const SizedBox(height: 6),
             SegmentedButton<ContentType>(
               showSelectedIcon: false,
               segments: const [
@@ -668,7 +681,7 @@ class _DynamicSegmentedButtonExampleState
                 });
               },
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 6),
 
             // Dynamic Content Area with Fade Transition
             Expanded(
