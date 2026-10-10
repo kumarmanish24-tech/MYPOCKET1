@@ -183,7 +183,7 @@ class _DynamicSegmentedButtonExampleState
             borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
           ),
           key: ValueKey('today'),
-          color: Color(0xFF323232),
+          color: Colors.white10,
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: Row(
@@ -193,7 +193,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("₹ 1,730",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 1,730",style: TextStyle(color: Colors.white70,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(width: 83,
@@ -340,7 +340,8 @@ class _DynamicSegmentedButtonExampleState
             borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
           ),
           key: ValueKey('weak'),
-          color: Color(0xFF323232),
+          // color: Color(0xFF323232),
+          color: Colors.white10,
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: Row(
@@ -350,7 +351,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("₹ 987",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 987",style: TextStyle(color: Colors. white70,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(width: 83,
@@ -497,7 +498,7 @@ class _DynamicSegmentedButtonExampleState
             borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
           ),
           key: ValueKey('month'),
-          color: Color(0xFF323232),
+          color: Colors.white10,
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: Row(
@@ -507,7 +508,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("₹ 875",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 875",style: TextStyle(color:  Colors.white70,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(
@@ -654,7 +655,7 @@ class _DynamicSegmentedButtonExampleState
             borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
           ),
           key: ValueKey('year'),
-          color: Color(0xFF323232),
+          color: Colors.white10,
           child: Padding(
             padding: EdgeInsets.all(15.0),
             child: Row(
@@ -664,7 +665,7 @@ class _DynamicSegmentedButtonExampleState
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text("Total Expenses"),
-                      Text("₹ 654",style: TextStyle(color: Colors.tealAccent,fontSize: 35 ,fontWeight: FontWeight.w700),),
+                      Text("₹ 654",style: TextStyle(color:  Colors.white70,fontSize: 35 ,fontWeight: FontWeight.w700),),
                       Row(
                         children: [
                           SizedBox(width: 83,
@@ -812,6 +813,8 @@ class _DynamicSegmentedButtonExampleState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.black,
         title: const Text('Expenses'),
       ),
       body: Padding(
@@ -824,9 +827,37 @@ class _DynamicSegmentedButtonExampleState
               children: [
                 SizedBox(width: 9,),
                 SegmentedButton<ContentType>(
+                  style: ButtonStyle(
+
+                    backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Color(0xFF4E4D4D); // Background color when SELECTED
+                      }
+                      return Colors.white12; // Background color when UNSELECTED
+                    }),
+                    foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+                      if (states.contains(WidgetState.selected)) {
+                        return Colors.white; // Text/Icon color when SELECTED
+                      }
+                      return Colors.white70; // Text/Icon color when UNSELECTED
+                    }),
+
+
+
+                    // 1. Remove the outline border
+                    side: WidgetStateProperty.all(BorderSide.none),
+
+                    // 2. Apply border radius to all outer corners
+                    shape: WidgetStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0), // Adjust the radius value here
+                      ),
+                    ),
+                  ),
                   showSelectedIcon: false,
                   segments: const [
                     ButtonSegment<ContentType>(
+
                       value: ContentType.today,
                       label: Text('Today'),
                     ),
@@ -852,7 +883,7 @@ class _DynamicSegmentedButtonExampleState
                 ),
                 IconButton(onPressed: (){
                   _openCategoryBottomSheetforplayment(context);
-                }, icon: Icon(Icons.more_vert))
+                }, icon: Icon(Icons.calendar_month_rounded,color: Color(0xFF989797),))
               ],
             ),
             const SizedBox(height: 6),
@@ -871,7 +902,8 @@ class _DynamicSegmentedButtonExampleState
               width: double.infinity,
               height: 100,
               decoration: BoxDecoration(
-                color: Color(0xFF323232),
+                // color: Color(0xFF323232),
+                color: Colors.white10,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -930,7 +962,7 @@ class _DynamicSegmentedButtonExampleState
               width: double.infinity,
               height: 350,
               decoration: BoxDecoration(
-                color: Color(0xFF323232),
+                color: Colors.white10,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Flexible(
@@ -998,7 +1030,7 @@ class CustomRoundedCardforsecondcard extends StatelessWidget {
               borderRadius: BorderRadius.circular(50.0), // Adjust the value for more/less roundness
             ),
 
-             color: Colors.white,
+            color: Color(0xFF989797),
               child: SizedBox(
                   height: 40,
                   width: 40,
