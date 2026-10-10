@@ -20,6 +20,7 @@ class _TableCalendarDemoScreenState extends State<TableCalendarDemoScreen> {
   final Map<DateTime, List<String>> _events = {
     DateTime.utc(2026, 10, 15): ['Client Presentation', 'Team Lunch'],
     DateTime.utc(2026, 10, 20): ['Product Release Checkup'],
+    DateTime.utc(2026, 10, 11): ['Foods'],
   };
 
   @override
@@ -37,6 +38,8 @@ class _TableCalendarDemoScreenState extends State<TableCalendarDemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.black45,
         title: const Text('TableCalendar Demo'),
 
       ),
