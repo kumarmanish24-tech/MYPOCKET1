@@ -37,6 +37,8 @@ dependencies:
   lottie: ^3.6.1
   easy_stepper: ^1.2.0
   reel_text: ^0.5.1
+  kalender: ^0.33.0
+  table_calendar: ^3.3.0
 
 dev_dependencies:
   flutter_test:

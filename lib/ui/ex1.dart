@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mypocket/ui/component/cal1.dart';
+import 'package:mypocket/ui/component/calender.dart';
+import 'package:reel_text/reel_text.dart';
 
 class CategoryItem {
   final String title;
@@ -29,7 +32,8 @@ class DynamicSegmentedButtonExample extends StatefulWidget {
 class _DynamicSegmentedButtonExampleState
     extends State<DynamicSegmentedButtonExample> {
 
-  CategoryItem? _selectedCategory;
+  bool _isCopied = true;
+
 
   final List<CategoryItem> _paymentMethods = const [
     CategoryItem(
@@ -142,7 +146,7 @@ class _DynamicSegmentedButtonExampleState
                     final category = _paymentMethods[index];
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: category.color.withOpacity(0.15),
+                        backgroundColor: category.color.withValues(alpha: 0.15),
                         child: Icon(category.icon, color: category.color),
                       ),
                       title: Text(
@@ -165,7 +169,6 @@ class _DynamicSegmentedButtonExampleState
     // 4. Update state when item selected
     if (result != null) {
       setState(() {
-        _selectedCategory = result;
       });
     }
   }
@@ -183,6 +186,7 @@ class _DynamicSegmentedButtonExampleState
             borderRadius: BorderRadius.circular(24.0), // Adjust the value for more/less roundness
           ),
           key: ValueKey('today'),
+
           color: Colors.white10,
           child: Padding(
             padding: EdgeInsets.all(15.0),
@@ -855,21 +859,24 @@ class _DynamicSegmentedButtonExampleState
                     ),
                   ),
                   showSelectedIcon: false,
-                  segments: const [
+                  segments: [
                     ButtonSegment<ContentType>(
 
+
+
+
                       value: ContentType.today,
-                      label: Text('Today'),
+                      label: const Text('Today'),
                     ),
-                    ButtonSegment<ContentType>(
+                    const ButtonSegment<ContentType>(
                       value: ContentType.thisWeek,
                       label: Text('Weekly'),
                     ),
-                    ButtonSegment<ContentType>(
+                    const ButtonSegment<ContentType>(
                       value: ContentType.thisMonth,
                       label: Text('Monthly'),
                     ),
-                    ButtonSegment<ContentType>(
+                    const ButtonSegment<ContentType>(
                       value: ContentType.thisYear,
                       label: Text('Yearly'),
                     ),
@@ -882,7 +889,8 @@ class _DynamicSegmentedButtonExampleState
                   },
                 ),
                 IconButton(onPressed: (){
-                  _openCategoryBottomSheetforplayment(context);
+                  // _openCategoryBottomSheetforplayment(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => TableCalendarDemoScreen()));
                 }, icon: Icon(Icons.calendar_month_rounded,color: Color(0xFF989797),))
               ],
             ),
@@ -943,6 +951,8 @@ class _DynamicSegmentedButtonExampleState
               ),
             ),
 
+
+
             Padding(
               padding: const EdgeInsets.only( top: 5,left: 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -979,7 +989,7 @@ class _DynamicSegmentedButtonExampleState
                     final category = _paymentMethods[index];
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: category.color.withOpacity(0.15),
+                        backgroundColor: category.color.withValues(alpha: 0.15),
                         child: Icon(category.icon, color: category.color),
                       ),
                       title: Text(
