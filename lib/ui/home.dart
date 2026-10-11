@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mypocket/ui/add_expance.dart';
 import 'package:mypocket/ui/ex1.dart';
@@ -15,6 +16,8 @@ class FloatingNavBarScreen extends StatefulWidget {
 }
 
 class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
+
+
   int _currentIndex = 0;
 
   // Icons matching your image layout
@@ -155,6 +158,103 @@ class homeui extends StatefulWidget {
 }
 
 class _homeuiState extends State<homeui> {
+
+  List<Container> cards = [
+    Container(
+        width: double.infinity,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 30, 30, 30), // Note: Color must be inside BoxDecoration when using decoration
+
+          borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+        ),
+        child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(width: 5,),
+            Column(crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+
+                    borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
+                  ),
+                  child: Icon(Icons.directions_bus_rounded,color: Colors.white70,) ,
+
+
+                ),
+              ],
+            ),
+            SizedBox(width: 1,),
+            Column(mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Travel",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                Text("Bus 12:10AM",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+
+              ],
+            ),
+            SizedBox(width: 100,),
+            Text("-155",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+            SizedBox(width: 10,),
+
+
+          ],
+        )
+    ),
+    Container(
+        width: double.infinity,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Color.fromARGB(255, 41, 41, 41), // Note: Color must be inside BoxDecoration when using decoration
+
+          borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+        ),
+        child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(width: 5,),
+            Column(crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+
+                    borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
+                  ),
+                  child: Icon(Icons.fastfood_outlined,color: Colors.white70,) ,
+
+
+                ),
+              ],
+            ),
+            SizedBox(width: 1,),
+            Column(mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Food",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                Text("Tea 1:10PM",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+
+              ],
+            ),
+            SizedBox(width: 100,),
+            Text("-35",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+            SizedBox(width: 10,),
+
+
+          ],
+        )
+    ),
+
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -329,68 +429,8 @@ class _homeuiState extends State<homeui> {
               ),
             ),
 
-
-
-
-
-
-
-
-
-
-
-
             Padding(
-              padding: const EdgeInsets.only(left:20,right: 20,top: 10),
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Quick Action",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 20),),
-                  SizedBox(width: 130,),
-                  GestureDetector(
-                    child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
-
-                  )
-
-                ],
-              ),
-            ),
-            SizedBox(height: 8,),
-
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                customebutton(text1: 'Add', text2: 'Money', onPressed: () {  }, icon: Icons.add,),
-                customebutton(text1: 'Add', text2: 'Expenses', onPressed: () {
-
-                   Navigator.push(
-                     context,
-                     PageRouteBuilder(
-                       pageBuilder: (context, animation, secondaryAnimation) => const addexpence(),
-                       transitionDuration: Duration.zero,        // Removes entry animation
-                       reverseTransitionDuration: Duration.zero, // Removes exit/back animation
-                     ),
-                   );
-
-                }, icon: Icons.payment,),
-                customebutton(text1: 'View', text2: 'Expenses', onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => const DynamicSegmentedButtonExample(),
-                      transitionDuration: Duration.zero,        // Removes entry animation
-                      reverseTransitionDuration: Duration.zero, // Removes exit/back animation
-                    ),
-                  );
-                }, icon: Icons.post_add,),
-                customebutton(text1: 'Set', text2: 'Goal', onPressed: () {  }, icon: Icons.outlined_flag,),
-                customebutton(text1: 'View', text2: 'Transfer', onPressed: () {  }, icon: Icons.currency_exchange,),
-
-              ],
-            ),
-
-
-
-            Padding(
-              padding: const EdgeInsets.only(left: 8,right: 8),
+              padding: const EdgeInsets.only(left: 8,right: 8,top: 8),
               child: Container(
                   width: double.infinity,
                   height: 110,
@@ -517,6 +557,66 @@ class _homeuiState extends State<homeui> {
 
 
 
+
+
+
+
+            Padding(
+              padding: const EdgeInsets.only(left:20,right: 20,top: 10),
+              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Quick Action",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 20),),
+                  SizedBox(width: 130,),
+                  GestureDetector(
+                    child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
+
+                  )
+
+                ],
+              ),
+            ),
+            SizedBox(height: 8,),
+
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                customebutton(text1: 'Add', text2: 'Money', onPressed: () {  }, icon: Icons.add,),
+                customebutton(text1: 'Add', text2: 'Expenses', onPressed: () {
+
+                   Navigator.push(
+                     context,
+                     PageRouteBuilder(
+                       pageBuilder: (context, animation, secondaryAnimation) => const addexpence(),
+                       transitionDuration: Duration.zero,        // Removes entry animation
+                       reverseTransitionDuration: Duration.zero, // Removes exit/back animation
+                     ),
+                   );
+
+                }, icon: Icons.payment,),
+                customebutton(text1: 'View', text2: 'Expenses', onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => const DynamicSegmentedButtonExample(),
+                      transitionDuration: Duration.zero,        // Removes entry animation
+                      reverseTransitionDuration: Duration.zero, // Removes exit/back animation
+                    ),
+                  );
+                }, icon: Icons.post_add,),
+                customebutton(text1: 'Set', text2: 'Goal', onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>  Example(),
+                      transitionDuration: Duration.zero,        // Removes entry animation
+                      reverseTransitionDuration: Duration.zero, // Removes exit/back animation
+                    ),
+                  );
+                }, icon: Icons.outlined_flag,),
+                customebutton(text1: 'View', text2: 'Transfer', onPressed: () {  }, icon: Icons.currency_exchange,),
+
+              ],
+            ),
+
             Padding(
               padding: const EdgeInsets.only(left:20,right: 20,top: 8),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -532,85 +632,37 @@ class _homeuiState extends State<homeui> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8,top: 8),
-              child: Container(
-                width: double.infinity,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(37, 255, 255, 255), // Note: Color must be inside BoxDecoration when using decoration
 
-                  borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
-                ),
-                child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 5,),
-                    Column(crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+            Flexible(
+              child: CardSwiper(
+                backCardOffset: const Offset(0, -15),
 
-                            borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
-                          ),
-                          child: Icon(Icons.directions_bus_rounded,color: Colors.white70,) ,
+                allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
+                scale: 0.96,
 
 
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 1,),
-                    Column(mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Travel",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-                        Text("Bus 12:10AM",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
-
-                      ],
-                    ),
-                    SizedBox(width: 100,),
-                    Text("-155",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
-                    SizedBox(width: 10,),
-
-
-                  ],
-                )
+                cardsCount: cards.length,
+                cardBuilder: (context, index, percentThresholdX, percentThresholdY) => cards[index],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8),
-              child: Container(
-                  width: 310,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.white24, // Note: Color must be inside BoxDecoration when using decoration
 
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(20), // Rounds both bottom corners
-                    ), // Adjust the double value for more/less curve
-                  ),
 
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-              child: Container(
-                  width: 300,
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: Colors.white30, // Note: Color must be inside BoxDecoration when using decoration
 
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(20), // Rounds both bottom corners
-                    ), // Adjust the double value for more/less curve
-                  ),
 
-              ),
-            ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

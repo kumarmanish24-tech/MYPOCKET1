@@ -39,6 +39,7 @@ dependencies:
   reel_text: ^0.5.1
   kalender: ^0.33.0
   table_calendar: ^3.3.0
+  flutter_card_swiper: ^7.2.0
 
 dev_dependencies:
   flutter_test:
