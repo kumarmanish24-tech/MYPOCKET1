@@ -548,11 +548,14 @@ class _addexpenceState extends State<addexpence> {
     ),
   ];
 
+  final List<String> _allItems = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
+  String _selectedItem = 'None';
+
   // 3. Open Modal Bottom Sheet
   void _openCategoryBottomSheet(BuildContext context) async {
     final CategoryItem? result = await showModalBottomSheet<CategoryItem>(
       context: context,
-      backgroundColor: const Color(0xFF252525),
+      backgroundColor: const Color(0xFF201F1F),
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -560,59 +563,116 @@ class _addexpenceState extends State<addexpence> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Top drag indicator bar
-              Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const Text(
-                'Select Category',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Category options list
-              Flexible(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _categories.length,
-                  separatorBuilder: (context, index) => const Divider(
-                    color: Colors.white12,
-                    height: 1,
-                    indent: 20,
-                    endIndent: 20,
+          child: SizedBox(
+            height: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Top drag indicator bar
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  itemBuilder: (context, index) {
-                    final category = _categories[index];
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: category.color.withOpacity(0.15),
-                        child: Icon(category.icon, color: category.color),
-                      ),
-                      title: Text(
-                        category.title,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      onTap: () {
-                        // Pass selected item back and close bottom sheet
-                        Navigator.pop(context, category);
-                      },
-                    );
-                  },
                 ),
-              ),
-            ],
+                const Text(
+                  'Select Category',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(width: 250,
+                      height: 50,
+                      child: SearchAnchor(
+                        builder: (BuildContext context, SearchController controller) {
+                          return SearchBar(
+                            elevation: const WidgetStatePropertyAll<double>(0.0),
+                            shadowColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
+                            backgroundColor: const WidgetStatePropertyAll<Color>(Colors.black26),
+                            controller: controller,
+                            padding: const WidgetStatePropertyAll<EdgeInsets>(
+                              EdgeInsets.symmetric(horizontal: 16.0),
+                            ),
+                            onTap: () => controller.openView(),
+                            onChanged: (_) => controller.openView(),
+                            leading: const Icon(Icons.search),
+                            hintText: 'Search Categ...',
+                          );
+                        },
+                        suggestionsBuilder: (BuildContext context, SearchController controller) {
+                          final String query = controller.text.toLowerCase();
+                          return _allItems
+                              .where((item) => item.toLowerCase().contains(query))
+                              .map((item) => ListTile(
+                            title: Text(item),
+                            onTap: () {
+                              setState(() {
+                                _selectedItem = item;
+                                controller.closeView(item);
+                              });
+                            },
+                          ))
+                              .toList();
+                        },
+                      ),
+                    ),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black26, // Button background color
+                      foregroundColor: Colors.white, // Text/icon color
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1.5,         // Border thickness
+                      ),
+
+                    )
+                        ,
+                        // onPressed: _showBottomforsavebutton,
+                         onPressed: () {  },
+                        child: Icon(Icons.add)
+                        ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                // Category options list
+                Flexible(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: _categories.length,
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Colors.white12,
+                      height: 1,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
+                    itemBuilder: (context, index) {
+                      final category = _categories[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: category.color.withOpacity(0.15),
+                          child: Icon(category.icon, color: category.color),
+                        ),
+                        title: Text(
+                          category.title,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          // Pass selected item back and close bottom sheet
+                          Navigator.pop(context, category);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -628,7 +688,7 @@ class _addexpenceState extends State<addexpence> {
   void _openCategoryBottomSheetforplayment(BuildContext context) async {
     final CategoryItem? result = await showModalBottomSheet<CategoryItem>(
       context: context,
-      backgroundColor: const Color(0xFF252525),
+      backgroundColor: const Color(0xFF201F1F),
       isScrollControlled: true,
       constraints: BoxConstraints(
         maxHeight:
@@ -641,59 +701,116 @@ class _addexpenceState extends State<addexpence> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Top drag indicator bar
-              Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const Text(
-                'Select Payment Method',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Category options list
-              Flexible(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _paymentMethods.length,
-                  separatorBuilder: (context, index) => const Divider(
-                    color: Colors.white12,
-                    height: 1,
-                    indent: 20,
-                    endIndent: 20,
+          child: SizedBox(
+            height: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Top drag indicator bar
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  itemBuilder: (context, index) {
-                    final category = _paymentMethods[index];
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: category.color.withOpacity(0.15),
-                        child: Icon(category.icon, color: category.color),
-                      ),
-                      title: Text(
-                        category.title,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      onTap: () {
-                        // Pass selected item back and close bottom sheet
-                        Navigator.pop(context, category);
-                      },
-                    );
-                  },
                 ),
-              ),
-            ],
+                const Text(
+                  'Select Payment Method',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(width: 250,
+                      height: 50,
+                      child: SearchAnchor(
+                        builder: (BuildContext context, SearchController controller) {
+                          return SearchBar(
+                            elevation: const WidgetStatePropertyAll<double>(0.0),
+                            shadowColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
+                            backgroundColor: const WidgetStatePropertyAll<Color>(Colors.black26),
+                            controller: controller,
+                            padding: const WidgetStatePropertyAll<EdgeInsets>(
+                              EdgeInsets.symmetric(horizontal: 16.0),
+                            ),
+                            onTap: () => controller.openView(),
+                            onChanged: (_) => controller.openView(),
+                            leading: const Icon(Icons.search),
+                            hintText: 'Search Categ...',
+                          );
+                        },
+                        suggestionsBuilder: (BuildContext context, SearchController controller) {
+                          final String query = controller.text.toLowerCase();
+                          return _allItems
+                              .where((item) => item.toLowerCase().contains(query))
+                              .map((item) => ListTile(
+                            title: Text(item),
+                            onTap: () {
+                              setState(() {
+                                _selectedItem = item;
+                                controller.closeView(item);
+                              });
+                            },
+                          ))
+                              .toList();
+                        },
+                      ),
+                    ),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black26, // Button background color
+                      foregroundColor: Colors.white, // Text/icon color
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1.5,         // Border thickness
+                      ),
+
+                    )
+                        ,
+                        // onPressed: _showBottomforsavebutton,
+                        onPressed: () {  },
+                        child: Icon(Icons.add)
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                // Category options list
+                Flexible(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: _paymentMethods.length,
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Colors.white12,
+                      height: 1,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
+                    itemBuilder: (context, index) {
+                      final category = _paymentMethods[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: category.color.withOpacity(0.15),
+                          child: Icon(category.icon, color: category.color),
+                        ),
+                        title: Text(
+                          category.title,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          // Pass selected item back and close bottom sheet
+                          Navigator.pop(context, category);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -709,7 +826,7 @@ class _addexpenceState extends State<addexpence> {
   void _openCategoryBottomSheetforsubcategories(BuildContext context) async {
     final CategoryItem? result = await showModalBottomSheet<CategoryItem>(
       context: context,
-      backgroundColor: const Color(0xFF252525),
+      backgroundColor: const Color(0xFF201F1F),
       isScrollControlled: true,
 
       // 2. Set the maximum height constraint
@@ -724,59 +841,116 @@ class _addexpenceState extends State<addexpence> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Top drag indicator bar
-              Container(
-                width: 40,
-                height: 4,
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white24,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const Text(
-                'Select Sub-Category',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 12),
-              // Category options list
-              Flexible(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: _subCategories.length,
-                  separatorBuilder: (context, index) => const Divider(
-                    color: Colors.white12,
-                    height: 1,
-                    indent: 20,
-                    endIndent: 20,
+          child: SizedBox(
+            height: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Top drag indicator bar
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
                   ),
-                  itemBuilder: (context, index) {
-                    final category = _subCategories[index];
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: category.color.withOpacity(0.15),
-                        child: Icon(category.icon, color: category.color),
-                      ),
-                      title: Text(
-                        category.title,
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      onTap: () {
-                        // Pass selected item back and close bottom sheet
-                        Navigator.pop(context, category);
-                      },
-                    );
-                  },
                 ),
-              ),
-            ],
+                const Text(
+                  'Select Sub-Category',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(width: 250,
+                      height: 50,
+                      child: SearchAnchor(
+                        builder: (BuildContext context, SearchController controller) {
+                          return SearchBar(
+                            elevation: const WidgetStatePropertyAll<double>(0.0),
+                            shadowColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
+                            backgroundColor: const WidgetStatePropertyAll<Color>(Colors.black26),
+                            controller: controller,
+                            padding: const WidgetStatePropertyAll<EdgeInsets>(
+                              EdgeInsets.symmetric(horizontal: 16.0),
+                            ),
+                            onTap: () => controller.openView(),
+                            onChanged: (_) => controller.openView(),
+                            leading: const Icon(Icons.search),
+                            hintText: 'Search Categ...',
+                          );
+                        },
+                        suggestionsBuilder: (BuildContext context, SearchController controller) {
+                          final String query = controller.text.toLowerCase();
+                          return _allItems
+                              .where((item) => item.toLowerCase().contains(query))
+                              .map((item) => ListTile(
+                            title: Text(item),
+                            onTap: () {
+                              setState(() {
+                                _selectedItem = item;
+                                controller.closeView(item);
+                              });
+                            },
+                          ))
+                              .toList();
+                        },
+                      ),
+                    ),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black26, // Button background color
+                      foregroundColor: Colors.white, // Text/icon color
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1.5,         // Border thickness
+                      ),
+
+                    )
+                        ,
+                        // onPressed: _showBottomforsavebutton,
+                        onPressed: () {  },
+                        child: Icon(Icons.add)
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                // Category options list
+                Flexible(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: _subCategories.length,
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Colors.white12,
+                      height: 1,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
+                    itemBuilder: (context, index) {
+                      final category = _subCategories[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: category.color.withOpacity(0.15),
+                          child: Icon(category.icon, color: category.color),
+                        ),
+                        title: Text(
+                          category.title,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          // Pass selected item back and close bottom sheet
+                          Navigator.pop(context, category);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -881,7 +1055,11 @@ class _addexpenceState extends State<addexpence> {
                 width: 1.5,         // Border thickness
               ),
 
-            ),onPressed: _showBottomforsavebutton, child: Text("Save")),
+            )
+                ,
+                // onPressed: _showBottomforsavebutton,
+                child: Text("Add"),
+                onPressed: showMyDialog),
           )
         ],
       ),
@@ -1221,7 +1399,7 @@ class _addexpenceState extends State<addexpence> {
                         padding: const EdgeInsets.only(left:20,right: 20,top: 10),
                         child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("More",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                            Text("Optional",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
                             SizedBox(width: 130,),
                             GestureDetector(
                               child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
@@ -1419,7 +1597,74 @@ class _addexpenceState extends State<addexpence> {
         ),
       ),
     );
+
+
+
+
+
+
   }
+
+  void showMyDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevents closing the dialog by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1E1E1E),
+
+          title: const Text('Add Expense'),
+          content: SizedBox(
+            height: 40,
+            child: Center(
+              child: ReelText.controller(
+                controller: _labelController,
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            Column(
+              children: [
+
+
+
+
+                Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF1E1E1E),
+                      foregroundColor: Colors.white, // Text/icon color
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1.5,         // Border thickness
+                      ),
+
+                    ),onPressed:(){
+                      Navigator.pop(context);
+                    }, child: Text("Cancel")),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white70, // Button background color
+                      foregroundColor: Colors.black, // Text/icon color
+
+
+                    ),onPressed:_onConfirmSave, child: Text("Add")),
+
+
+                  ],
+                )
+
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+
 
 
 
@@ -1799,7 +2044,3 @@ class CustomContainericon1 extends StatelessWidget {
 }
 
 
-
-
-
-// Category selection dialog

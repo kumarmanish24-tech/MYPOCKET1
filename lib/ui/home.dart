@@ -210,6 +210,52 @@ class _homeuiState extends State<homeui> {
         width: double.infinity,
         height: 80,
         decoration: BoxDecoration(
+          color: Color.fromARGB(255, 44, 44, 44), // Note: Color must be inside BoxDecoration when using decoration
+
+          borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+        ),
+        child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(width: 5,),
+            Column(crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+
+                    borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
+                  ),
+                  child: Icon(Icons.kitesurfing,color: Colors.white70,) ,
+
+
+                ),
+              ],
+            ),
+            SizedBox(width: 1,),
+            Column(mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Other",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+                Text("Kit 2:15PM",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+
+              ],
+            ),
+            SizedBox(width: 100,),
+            Text("-155",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+            SizedBox(width: 10,),
+
+
+          ],
+        )
+    ),
+    Container(
+        width: double.infinity,
+        height: 80,
+        decoration: BoxDecoration(
           color: Color.fromARGB(255, 41, 41, 41), // Note: Color must be inside BoxDecoration when using decoration
 
           borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
@@ -635,10 +681,11 @@ class _homeuiState extends State<homeui> {
 
             Flexible(
               child: CardSwiper(
-                backCardOffset: const Offset(0, -15),
+                backCardOffset: const Offset(0, -10),
 
                 allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
                 scale: 0.96,
+
 
 
                 cardsCount: cards.length,
