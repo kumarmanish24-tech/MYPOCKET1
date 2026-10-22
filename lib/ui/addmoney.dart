@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mypocket/state_provider/provider_for_addmoney_page.dart';
 import 'package:provider/provider.dart';
 import 'package:reel_text/reel_text.dart';
@@ -24,6 +25,9 @@ class addmoney extends StatefulWidget {
 }
 
 class _addmoneyState extends State<addmoney> {
+
+  String defaultText = "No Data Available";
+  DateTime now = DateTime.now();
 
   late final _initialmoney = context.watch<Addmoney>();
    final _initialmoneytextfield = TextEditingController();
@@ -174,7 +178,7 @@ class _addmoneyState extends State<addmoney> {
       // Maximum allowable date
     );
 
-    if (picked != null && picked != _selectedDate?.toUtc()) {
+    if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
       });
@@ -897,7 +901,8 @@ class _addmoneyState extends State<addmoney> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10.0),
                                       child: Text(
-                                        "Sun, 4 October 2026",
+                                        "${DateFormat('dd-MMM-yyyy').format(_selectedDate ?? DateTime.now())}"
+                                        ,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -946,7 +951,7 @@ class _addmoneyState extends State<addmoney> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10.0),
                                       child: Text(
-                                        "${_selectedTime}",
+                                        "${_selectedTime?.format(context) ?? DateFormat('hh:mm a').format(now) }",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,

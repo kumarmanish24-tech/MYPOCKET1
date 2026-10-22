@@ -18,7 +18,7 @@ class Addmoney with ChangeNotifier{
 
 class Receivedmoneyfrommethod with ChangeNotifier{
 
-  String _title = "Not selected";
+  String _title = "select";
   String get title_name => _title;
 
   void select_title(newtitle){
@@ -33,7 +33,7 @@ class Receivedmoneyfrommethod with ChangeNotifier{
 
 class ReceivedmoneyViamethod with ChangeNotifier{
 
-  String _title = "Not selected";
+  String _title = "select";
   String get title_name => _title;
 
   void select_title(newtitle){
