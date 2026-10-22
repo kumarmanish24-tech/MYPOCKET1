@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mypocket/ui/add_expance.dart';
+import 'package:mypocket/ui/addmoney.dart';
 import 'package:mypocket/ui/ex1.dart';
 import 'package:mypocket/ui/view_expance.dart';
 import 'ex.dart';
@@ -24,7 +25,7 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
   final List<NavItemData> _navItems = [
     NavItemData(icon: Icons.home_rounded, label: 'Home'),
 
-    // NavItemData(icon: Icons.pie_chart_outline_rounded, label: 'Stats'),
+    NavItemData(icon: Icons.checklist, label: 'Todo'),
     NavItemData(icon: Icons.access_time_rounded, label: 'History'),
     NavItemData(icon: Icons.person_outline_rounded, label: 'Profile'),
   ];
@@ -39,6 +40,16 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
           child: IconButton(onPressed: (){
             // Navigator.push(context, MaterialPageRoute(builder: (context) => view_expance()));
           }, icon: const Icon(Icons.face)),
+        )
+      ],
+    )),
+    Center(child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Center(
+          child: IconButton(onPressed: (){
+            // Navigator.push(context, MaterialPageRoute(builder: (context) => view_expance()));
+          }, icon: const Icon(Icons.today_outlined)),
         )
       ],
     )),
@@ -625,7 +636,19 @@ class _homeuiState extends State<homeui> {
 
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                customebutton(text1: 'Add', text2: 'Money', onPressed: () {  }, icon: Icons.add,),
+                customebutton(text1: 'Add', text2: 'Money', onPressed: () {
+
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => const addmoney(),
+                      transitionDuration: Duration.zero,        // Removes entry animation
+                      reverseTransitionDuration: Duration.zero, // Removes exit/back animation
+                    ),
+                  );
+
+
+                }, icon: Icons.add,),
                 customebutton(text1: 'Add', text2: 'Expenses', onPressed: () {
 
                    Navigator.push(
@@ -752,6 +775,8 @@ class _homeuiState extends State<homeui> {
 
 
 }
+
+
 
 class CustomContainericon extends StatelessWidget {
   final Icon icon;
