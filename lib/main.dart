@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:mypocket/state_provider/provider_for_addmoney_page.dart';
+import 'package:provider/provider.dart';
 
 import 'ui/home.dart';
 
@@ -16,7 +18,16 @@ void main() {
     statusBarIconBrightness: Brightness.light, // White status bar icons (Android)
     statusBarBrightness: Brightness.dark, // White status bar icons (iOS)
   ));
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(providers: [
+      ChangeNotifierProvider(create: (_) => Addmoney()),
+      ChangeNotifierProvider(create: (_) => TimeModel()),
+      ChangeNotifierProvider(create: (_) => Receivedmoneyfrommethod()),
+      ChangeNotifierProvider(create: (_) => ReceivedmoneyViamethod()),
+
+    ],
+    child: const MyApp(),)
+  );
 }
 
 class MyApp extends StatelessWidget {

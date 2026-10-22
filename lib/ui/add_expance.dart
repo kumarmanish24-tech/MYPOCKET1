@@ -1082,10 +1082,10 @@ class _addexpenceState extends State<addexpence> {
                         padding: const EdgeInsets.only(left: 8.0, right: 8, top: 10),
                         child: Container(
                           width: double.infinity,
-                          height: 400,
+                          height: 118,
                           decoration: BoxDecoration(
                             color: Color.fromARGB(37, 255, 255, 255), // Note: Color must be inside BoxDecoration when using decoration
-          
+
                             borderRadius: BorderRadius.circular(
                               30.0,
                             ), // Adjust the double value for more/less curve
@@ -1095,7 +1095,7 @@ class _addexpenceState extends State<addexpence> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                 onTap: _showBottomSheet2,
+                                onTap: _showBottomSheet2,
 
 
                                 child: SizedBox(
@@ -1112,7 +1112,7 @@ class _addexpenceState extends State<addexpence> {
                                           ),
                                           SizedBox(width: 10),
                                           Text(
-                                            "Amount",
+                                            "Enter Amount",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               color: Colors.white70,
@@ -1126,7 +1126,7 @@ class _addexpenceState extends State<addexpence> {
                                         children: [
                                           SizedBox(width: 20),
                                           Text(
-                                            "₹3,500",
+                                            "₹00.00",
                                             style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               color: Colors.white,
@@ -1139,16 +1139,56 @@ class _addexpenceState extends State<addexpence> {
                                   ),
                                 ),
                               ),
-                              Divider(
-                                color: Colors.black45, // Line color
-                                thickness: 2.0, // Line thickness
-                                height:
-                                0.0, // Total height allocated to the widget (includes empty space above/below)
-                                indent:
-                                20.0, // Empty space before the line starts (left side)
-                                endIndent:
-                                20.0, // Empty space after the line ends (right side)
-                              ),
+
+
+
+
+
+
+
+                            ],
+
+
+
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:20,right: 20,top: 10),
+                        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Info",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white,fontSize: 20),),
+                            SizedBox(width: 130,),
+                            GestureDetector(
+                              child:  Text("",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white38),),
+
+                            )
+
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 8, top: 10),
+                        child: Container(
+                          width: double.infinity,
+                          height: 330,
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(37, 255, 255, 255), // Note: Color must be inside BoxDecoration when using decoration
+          
+                            borderRadius: BorderRadius.circular(
+                              30.0,
+                            ), // Adjust the double value for more/less curve
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+
+                              SizedBox(height: 5),
+
+
+
           
                               InkWell(
                                 onTap:  () => _openCategoryBottomSheet(context),
@@ -1157,7 +1197,7 @@ class _addexpenceState extends State<addexpence> {
 
                                     Row(
                                       children: [
-                                        SizedBox(width: 20,),
+                                        SizedBox(width: 20,height: 50,),
                                         Icon(
                                           Icons.grid_view,
                                           color: Colors.white54,
@@ -1208,7 +1248,7 @@ class _addexpenceState extends State<addexpence> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(width: 20),
+                                        SizedBox(width: 20,height: 50,),
                                         Icon(
                                           Icons.subdirectory_arrow_right,
                                           color: Colors.white54,
@@ -1257,7 +1297,7 @@ class _addexpenceState extends State<addexpence> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(width: 20),
+                                        SizedBox(width: 20,height: 50,),
                                         Icon(
                                           Icons.calendar_today,
                                           color: Colors.white54,
@@ -1306,7 +1346,7 @@ class _addexpenceState extends State<addexpence> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(width: 20),
+                                        SizedBox(width: 20,height: 50,),
                                         Icon(
                                           Icons.access_time_outlined,
                                           color: Colors.white54,
@@ -1354,7 +1394,7 @@ class _addexpenceState extends State<addexpence> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(width: 20),
+                                        SizedBox(width: 20,height: 50,),
                                         Icon(
                                           Icons.payment,
                                           color: Colors.white54,
@@ -1410,7 +1450,7 @@ class _addexpenceState extends State<addexpence> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 8.0, right: 8, top: 10),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8, top: 10,bottom: 20),
                         child: Container(
                           width: double.infinity,
                           height: 240,
@@ -1496,7 +1536,7 @@ class _addexpenceState extends State<addexpence> {
                                   children: [
                                     Row(
                                       children: [
-                                        SizedBox(width: 20),
+                                        SizedBox(width: 20,height: 50,),
                                         Icon(
                                           Icons.store_mall_directory,
                                           color: Colors.white54,
@@ -1582,6 +1622,8 @@ class _addexpenceState extends State<addexpence> {
                           ),
                         ),
                       ),
+
+
                     ],
                   ),
                 ),
@@ -1613,15 +1655,15 @@ class _addexpenceState extends State<addexpence> {
         return AlertDialog(
           backgroundColor: const Color(0xFF1E1E1E),
 
-          title: const Text('Add Expense'),
+          title: const Text('Add Expense',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,),),
           content: SizedBox(
             height: 40,
             child: Center(
               child: ReelText.controller(
                 controller: _labelController,
                 style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+
                 ),
               ),
             ),

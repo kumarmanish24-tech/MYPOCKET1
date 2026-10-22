@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mypocket/state_provider/provider_for_addmoney_page.dart';
+import 'package:provider/provider.dart';
 import 'package:reel_text/reel_text.dart';
 
 
@@ -22,6 +24,31 @@ class addmoney extends StatefulWidget {
 }
 
 class _addmoneyState extends State<addmoney> {
+
+  late final _initialmoney = context.watch<Addmoney>();
+   final _initialmoneytextfield = TextEditingController();
+
+
+
+
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    // 1. Initial text state
+    _labelController = ReelTextController(initialText: 'Are you sure?');
+  }
+
+
+
+  @override
+  void dispose() {
+    _labelController.dispose();
+    super.dispose();
+  }
+
 
   late final ReelTextController _labelController;
 
@@ -69,6 +96,7 @@ class _addmoneyState extends State<addmoney> {
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
+
       initialTime: _selectedTime ?? TimeOfDay.now(),
       // Force 24-hour mode or 12-hour mode if needed:
       builder: (BuildContext context, Widget? child) {
@@ -146,7 +174,7 @@ class _addmoneyState extends State<addmoney> {
       // Maximum allowable date
     );
 
-    if (picked != null && picked != _selectedDate) {
+    if (picked != null && picked != _selectedDate?.toUtc()) {
       setState(() {
         _selectedDate = picked;
       });
@@ -158,60 +186,91 @@ class _addmoneyState extends State<addmoney> {
 
   final List<CategoryItem> _categories = const [
     CategoryItem(
-      title: 'Food & Dining',
-      icon: Icons.restaurant,
-      color: Colors.orange,
+      title: 'Pocket Money',
+      icon: Icons.account_balance_wallet,
+      color: Colors.green,
     ),
     CategoryItem(
-      title: 'Transport',
-      icon: Icons.directions_bus,
+      title: 'Family',
+      icon: Icons.family_restroom,
       color: Colors.blue,
     ),
     CategoryItem(
-      title: 'Shopping',
-      icon: Icons.shopping_bag,
-      color: Colors.purple,
-    ),
-    CategoryItem(
-      title: 'Housing',
-      icon: Icons.home,
-      color: Colors.amber,
-    ),
-    CategoryItem(
-      title: 'Education',
+      title: 'Scholarship',
       icon: Icons.school,
       color: Colors.indigo,
     ),
     CategoryItem(
-      title: 'Health & Medical',
-      icon: Icons.medical_services,
-      color: Colors.red,
+      title: 'Part-time Job',
+      icon: Icons.work,
+      color: Colors.orange,
     ),
     CategoryItem(
-      title: 'Entertainment',
-      icon: Icons.movie,
-      color: Colors.pink,
+      title: 'Freelancing',
+      icon: Icons.laptop_mac,
+      color: Colors.purple,
     ),
     CategoryItem(
-      title: 'Bills & Utilities',
-      icon: Icons.receipt_long,
+      title: 'Business',
+      icon: Icons.storefront,
       color: Colors.teal,
     ),
     CategoryItem(
-      title: 'Other',
+      title: 'Gift',
+      icon: Icons.card_giftcard,
+      color: Colors.pink,
+    ),
+    CategoryItem(
+      title: 'Refund',
+      icon: Icons.currency_exchange,
+      color: Colors.cyan,
+    ),
+    CategoryItem(
+      title: 'Investment Returns',
+      icon: Icons.trending_up,
+      color: Colors.lightGreen,
+    ),
+    CategoryItem(
+      title: 'Interest',
+      icon: Icons.savings,
+      color: Colors.amber,
+    ),
+    CategoryItem(
+      title: 'Selling Items',
+      icon: Icons.sell,
+      color: Colors.deepOrange,
+    ),
+    CategoryItem(
+      title: 'Other Income',
       icon: Icons.more_horiz,
       color: Colors.grey,
     ),
   ];
-  final List<String> _allItems = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
-  String _selectedItem = 'None';
+  final List<String> _allItems = [
+    'Pocket Money',
+    'Family',
+    'Scholarship',
+    'Part-time Job',
+    'Freelancing',
+    'Business',
+    'Gift',
+    'Refund',
+    'Investment Returns',
+    'Interest',
+    'Selling Items',
+    'Other Income',
+  ];
 
-
-  void _openCategoryBottomSheet(BuildContext context) async {
+  void _openCategoryBottomSheetforplayment(BuildContext context) async {
     final CategoryItem? result = await showModalBottomSheet<CategoryItem>(
       context: context,
       backgroundColor: const Color(0xFF201F1F),
       isScrollControlled: true,
+      constraints: BoxConstraints(
+        maxHeight:
+        MediaQuery.of(context).size.height *
+            0.55, // Caps it at 75% of screen height
+      ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -234,7 +293,7 @@ class _addmoneyState extends State<addmoney> {
                   ),
                 ),
                 const Text(
-                  'Select Category',
+                  'Select Payment Method',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,
@@ -300,7 +359,7 @@ class _addmoneyState extends State<addmoney> {
                 Flexible(
                   child: ListView.separated(
                     shrinkWrap: true,
-                    itemCount: _categories.length,
+                    itemCount: _paymentMethods.length,
                     separatorBuilder: (context, index) => const Divider(
                       color: Colors.white12,
                       height: 1,
@@ -308,7 +367,7 @@ class _addmoneyState extends State<addmoney> {
                       endIndent: 20,
                     ),
                     itemBuilder: (context, index) {
-                      final category = _categories[index];
+                      final category = _paymentMethods[index];
                       return ListTile(
                         leading: CircleAvatar(
                           backgroundColor: category.color.withOpacity(0.15),
@@ -319,7 +378,7 @@ class _addmoneyState extends State<addmoney> {
                           style: const TextStyle(color: Colors.white),
                         ),
                         onTap: () {
-                          // Pass selected item back and close bottom sheet
+                          context.read<ReceivedmoneyViamethod>().select_title(category.title);
                           Navigator.pop(context, category);
                         },
                       );
@@ -340,6 +399,192 @@ class _addmoneyState extends State<addmoney> {
       });
     }
   }
+  final List<CategoryItem> _paymentMethods = const [
+    CategoryItem(
+      title: 'Cash',
+      icon: Icons.money,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'UPI',
+      icon: Icons.qr_code_2,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Debit Card',
+      icon: Icons.credit_card,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Credit Card',
+      icon: Icons.credit_score,
+      color: Colors.purple,
+    ),
+    CategoryItem(
+      title: 'Net Banking',
+      icon: Icons.account_balance,
+      color: Colors.teal,
+    ),
+    CategoryItem(
+      title: 'Mobile Wallet',
+      icon: Icons.account_balance_wallet,
+      color: Colors.orange,
+    ),
+    CategoryItem(
+      title: 'Bank Transfer',
+      icon: Icons.swap_horiz,
+      color: Colors.cyan,
+    ),
+
+    CategoryItem(
+      title: 'Other',
+      icon: Icons.more_horiz,
+      color: Colors.grey,
+    ),
+  ];
+
+  String _selectedItem = 'None';
+
+
+  void _openCategoryBottomSheet(BuildContext context) async {
+    final CategoryItem? result = await showModalBottomSheet<CategoryItem>(
+      context: context,
+      backgroundColor: const Color(0xFF201F1F),
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          child: SizedBox(
+            height: 400,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Top drag indicator bar
+                Container(
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                const Text(
+                  'Received from',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(width: 250,
+                      height: 50,
+                      child: SearchAnchor(
+                        builder: (BuildContext context, SearchController controller) {
+                          return SearchBar(
+                            elevation: const WidgetStatePropertyAll<double>(0.0),
+                            shadowColor: const WidgetStatePropertyAll<Color>(Colors.transparent),
+                            backgroundColor: const WidgetStatePropertyAll<Color>(Colors.white12),
+                            controller: controller,
+                            padding: const WidgetStatePropertyAll<EdgeInsets>(
+                              EdgeInsets.symmetric(horizontal: 16.0),
+                            ),
+                            onTap: () => controller.openView(),
+                            onChanged: (_) => controller.openView(),
+                            leading: const Icon(Icons.search),
+                            hintText: 'Search Categ...',
+                          );
+                        },
+                        suggestionsBuilder: (BuildContext context, SearchController controller) {
+                          final String query = controller.text.toLowerCase();
+                          return _allItems
+                              .where((item) => item.toLowerCase().contains(query))
+                              .map((item) => ListTile(
+                            title: Text(item),
+                            onTap: () {
+                              setState(() {
+                                _selectedItem = item;
+                                controller.closeView(item);
+                              });
+                            },
+                          ))
+                              .toList();
+                        },
+                      ),
+                    ),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white24, // Button background color
+                      foregroundColor: Colors.black, // Text/icon color
+
+
+                    )
+                        ,
+                        // onPressed: _showBottomforsavebutton,
+                        onPressed: () {  },
+                        child: Icon(Icons.add)
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                // Category options list
+                Flexible(
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: _categories.length,
+                    separatorBuilder: (context, index) => const Divider(
+                      color: Colors.white12,
+                      height: 1,
+                      indent: 20,
+                      endIndent: 20,
+                    ),
+                    itemBuilder: (context, index) {
+                      final category = _categories[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: category.color.withOpacity(0.15),
+                          child: Icon(category.icon, color: category.color),
+                        ),
+                        title: Text(
+                          category.title,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        onTap: () {
+                          // Pass selected item back and close bottom sheet
+
+                          context.read<Receivedmoneyfrommethod>().select_title(category.title);
+                          Navigator.pop(context, category);
+                        },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    // 4. Update state when item selected
+    if (result != null) {
+      setState(() {
+        _selectedCategory = result;
+      });
+    }
+  }
+
+
+
+
+
+
+
 
 
   @override
@@ -376,18 +621,15 @@ class _addmoneyState extends State<addmoney> {
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
             child: ElevatedButton(style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black, // Button background color
-              foregroundColor: Colors.white, // Text/icon color
-              side: const BorderSide(
-                color: Colors.white54, // Border color
-                width: 1.5,         // Border thickness
-              ),
+              backgroundColor: Colors.white70,// Button background color
+              foregroundColor: Colors.black, // Text/icon color
+
 
             )
                 ,
                 // onPressed: _showBottomforsavebutton,
                 child: Text("Add"),
-                onPressed: (){},
+              onPressed: showMyDialog
             ),
           )
         ],
@@ -456,14 +698,17 @@ class _addmoneyState extends State<addmoney> {
                                       Row(
                                         children: [
                                           SizedBox(width: 20),
-                                          Text(
-                                            "₹00.00",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white,
-                                              fontSize: 35,
-                                            ),
-                                          ),
+                                          Consumer<Addmoney>(builder: (context,money,child){
+                                            return Text(
+                                             "₹ ${money.moneyvalue}",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white,
+                                                fontSize: 35,
+                                              ),
+                                            );
+                                          }),
+
                                         ],
                                       ),
                                     ],
@@ -543,18 +788,21 @@ class _addmoneyState extends State<addmoney> {
                                     ),
 
                                     Spacer(),
-
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10.0),
-                                      child: Text(
-                                        "Family",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                        ),
-                                      ),
+                                      child: Consumer<Receivedmoneyfrommethod>(builder: (context,title,child){
+                                        return Text(
+                                          " ${title.title_name}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        );
+                                      }),
                                     ),
+
+
                                     SizedBox(width: 10),
                                   ],
                                 ),
@@ -570,7 +818,7 @@ class _addmoneyState extends State<addmoney> {
                               ),
                               InkWell(
 
-                                onTap:  () => _openCategoryBottomSheet(context),
+                                onTap:  () => _openCategoryBottomSheetforplayment(context),
                                 child: Row(
                                   children: [
 
@@ -598,14 +846,16 @@ class _addmoneyState extends State<addmoney> {
 
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10.0),
-                                      child: Text(
-                                        "Upi",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                        ),
-                                      ),
+                                      child: Consumer<ReceivedmoneyViamethod>(builder: (context,title,child){
+                                        return Text(
+                                          " ${title.title_name}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
+                                        );
+                                      }),
                                     ),
                                     SizedBox(width: 10),
                                   ],
@@ -696,7 +946,7 @@ class _addmoneyState extends State<addmoney> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10.0),
                                       child: Text(
-                                        "8:19 pm",
+                                        "${_selectedTime}",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -743,7 +993,7 @@ class _addmoneyState extends State<addmoney> {
                         padding: const EdgeInsets.only(left: 8.0, right: 8, top: 10),
                         child: Container(
                           width: double.infinity,
-                          height: 180,
+                          height: 160,
                           decoration: BoxDecoration(
                             color: Color.fromARGB(37, 255, 255, 255), // Note: Color must be inside BoxDecoration when using decoration
 
@@ -813,8 +1063,7 @@ class _addmoneyState extends State<addmoney> {
                               Divider(
                                 color: Colors.black45, // Line color
                                 thickness: 2.0, // Line thickness
-                                height:
-                                20.0, // Total height allocated to the widget (includes empty space above/below)
+                              // Total height allocated to the widget (includes empty space above/below)
                                 indent:
                                 20.0, // Empty space before the line starts (left side)
                                 endIndent:
@@ -833,7 +1082,7 @@ class _addmoneyState extends State<addmoney> {
                                       SizedBox(width: 10),
 
                                       Text(
-                                        "receipt",
+                                        "Payment proof",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white70,
@@ -950,9 +1199,15 @@ class _addmoneyState extends State<addmoney> {
 
                   Expanded(
                     child: TextField(
+                      controller: _initialmoneytextfield,
+
 
                       textInputAction: TextInputAction.done, // Shows the check/done button on the keyboard
                       onSubmitted: (value) {
+
+                         context.read<Addmoney>().increse(value);
+
+
                         // Call your function here when the check button is clicked
                         Navigator.pop(context);
                       },
@@ -990,6 +1245,66 @@ class _addmoneyState extends State<addmoney> {
 
             ],
           ),
+        );
+      },
+    );
+  }
+
+  void showMyDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevents closing the dialog by tapping outside
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1E1E1E),
+
+          title: const Text('Add Money',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,),),
+          content: SizedBox(
+            height: 40,
+            child: Center(
+              child: ReelText.controller(
+                controller: _labelController,
+                style: const TextStyle(
+                  fontSize: 20,
+
+                ),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            Column(
+              children: [
+
+
+
+
+                Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF1E1E1E),
+                      foregroundColor: Colors.white, // Text/icon color
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1.5,         // Border thickness
+                      ),
+
+                    ),onPressed:(){
+                      Navigator.pop(context);
+                    }, child: Text("Cancel")),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white70, // Button background color
+                      foregroundColor: Colors.black, // Text/icon color
+
+
+                    ),onPressed:_onConfirmSave, child: Text("Add")),
+
+
+                  ],
+                )
+
+              ],
+            )
+          ],
         );
       },
     );

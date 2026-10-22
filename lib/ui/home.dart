@@ -47,9 +47,18 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Center(
-          child: IconButton(onPressed: (){
-            // Navigator.push(context, MaterialPageRoute(builder: (context) => view_expance()));
-          }, icon: const Icon(Icons.today_outlined)),
+          child: Column(
+            children: [
+              Text("24"),
+              SizedBox(height: 200,),
+              FloatingActionButton(onPressed: (){
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => stateprovider()));
+              },
+                child: Icon(Icons.add),
+              )
+            ],
+          ),
         )
       ],
     )),
@@ -172,8 +181,8 @@ class _homeuiState extends State<homeui> {
 
   List<Container> cards = [
     Container(
-        width: double.infinity,
-        height: 80,
+        width: 370,
+        height: 70,
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 30, 30, 30), // Note: Color must be inside BoxDecoration when using decoration
 
@@ -219,7 +228,7 @@ class _homeuiState extends State<homeui> {
     ),
     Container(
         width: double.infinity,
-        height: 80,
+        height: 70,
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 44, 44, 44), // Note: Color must be inside BoxDecoration when using decoration
 
@@ -265,7 +274,7 @@ class _homeuiState extends State<homeui> {
     ),
     Container(
         width: double.infinity,
-        height: 80,
+        height: 70,
         decoration: BoxDecoration(
           color: Color.fromARGB(255, 41, 41, 41), // Note: Color must be inside BoxDecoration when using decoration
 
@@ -315,48 +324,56 @@ class _homeuiState extends State<homeui> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar( scrolledUnderElevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black12 ,
+        title:  Padding(
+          padding: const EdgeInsets.only(left: 5.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Good Morning",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+              Text(
+                "Manish!",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white54,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ) ,
+        actions: [
+
+          IconButton(onPressed: (){}, icon: Icon(Icons.notifications_none)),
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: CircleAvatar(
+              radius:15,
+              backgroundColor:Colors.white70,
+              child: CircleAvatar(
+                radius: 13,
+                backgroundImage: NetworkImage("https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+              ),
+            ),
+          ),
+
+        ],
+
+      ),
       backgroundColor: Colors.black45,
       body: Center(
         child: Column(
           children: [
-            Container(
-              width: double.infinity,
-              height: 110,
-               // color: Colors.white70,
-
-
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 15,),
-                    Column(crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Good Morning,",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white70,fontSize: 30),),
-                        Text("Manish!",style: TextStyle(fontWeight: FontWeight.w400,color: Colors.white70,fontSize: 30)),
-                      ],
-                    ),
-                    SizedBox(width: 100,),
-                    Column(
-                      children: [
-                        SizedBox(height: 10,),
-                        CircleAvatar(
-                          radius:20,
-                          backgroundColor:Colors.white70,
-                          child: CircleAvatar(
-                            radius: 18,
-                            backgroundImage: NetworkImage("https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-                          ),
-                        ),
-                      ],
-                    ),
-
-
-                  ],
-                ),
-              )
-            ),
+            
             Padding(
               padding: const EdgeInsets.only(left: 8.0,right: 8,top:8),
               child: Container(
@@ -365,7 +382,7 @@ class _homeuiState extends State<homeui> {
                 decoration: BoxDecoration(
                   color: Color.fromARGB(37, 255, 255, 255), // Note: Color must be inside BoxDecoration when using decoration
 
-                  borderRadius: BorderRadius.circular(24.0), // Adjust the double value for more/less curve
+                  borderRadius: BorderRadius.circular(30.0), // Adjust the double value for more/less curve
                 ),
                 child: Column(mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -487,14 +504,14 @@ class _homeuiState extends State<homeui> {
             ),
 
             Padding(
-              padding: const EdgeInsets.only(left: 8,right: 8,top: 8),
+              padding: const EdgeInsets.only(left: 8,right: 8,top: 16),
               child: Container(
                   width: double.infinity,
                   height: 110,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(37, 255, 255, 255), // Note: Color must be inside BoxDecoration when using decoration
 
-                    borderRadius: BorderRadius.circular(24.0), // Adjust the double value for more/less curve
+                    borderRadius: BorderRadius.circular(30.0), // Adjust the double value for more/less curve
                   ),
                   child:  Column(
                     children: [
@@ -672,14 +689,14 @@ class _homeuiState extends State<homeui> {
                   );
                 }, icon: Icons.post_add,),
                 customebutton(text1: 'Set', text2: 'Goal', onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) =>  Example(),
-                      transitionDuration: Duration.zero,        // Removes entry animation
-                      reverseTransitionDuration: Duration.zero, // Removes exit/back animation
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   PageRouteBuilder(
+                  //     pageBuilder: (context, animation, secondaryAnimation) =>  Example(),
+                  //     transitionDuration: Duration.zero,        // Removes entry animation
+                  //     reverseTransitionDuration: Duration.zero, // Removes exit/back animation
+                  //   ),
+                  // );
                 }, icon: Icons.outlined_flag,),
                 customebutton(text1: 'View', text2: 'Transfer', onPressed: () {  }, icon: Icons.currency_exchange,),
 
