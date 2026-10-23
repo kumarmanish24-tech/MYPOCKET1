@@ -47,15 +47,3 @@ class ReceivedmoneyViamethod with ChangeNotifier{
 }
 
 
-class TimeModel with ChangeNotifier {
-  TimeOfDay? _selectedTime;
-
-
-  TimeOfDay? get selectedTime => _selectedTime;
-
-
-  void setTime(TimeOfDay newTime) {
-    _selectedTime = newTime;
-    notifyListeners();
-  }
-}

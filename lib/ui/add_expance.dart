@@ -2,9 +2,11 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mypocket/state_provider/provider_for_addexpense.dart';
 import 'package:mypocket/ui/add_expance.dart';
 import 'package:mypocket/ui/component/glowingbutton.dart';
 import 'package:mypocket/ui/ex.dart';
+import 'package:provider/provider.dart';
 import 'package:reel_text/reel_text.dart';
 
 class CategoryItem {
@@ -664,7 +666,7 @@ class _addexpenceState extends State<addexpence> {
                           style: const TextStyle(color: Colors.white),
                         ),
                         onTap: () {
-                          // Pass selected item back and close bottom sheet
+                          context.read<selectcategory>().select_category(category.title);
                           Navigator.pop(context, category);
                         },
                       );
@@ -802,7 +804,7 @@ class _addexpenceState extends State<addexpence> {
                           style: const TextStyle(color: Colors.white),
                         ),
                         onTap: () {
-                          // Pass selected item back and close bottom sheet
+                          context.read<select_paymentmethod>().select_paymentcategory(category.title);
                           Navigator.pop(context, category);
                         },
                       );
@@ -942,7 +944,7 @@ class _addexpenceState extends State<addexpence> {
                           style: const TextStyle(color: Colors.white),
                         ),
                         onTap: () {
-                          // Pass selected item back and close bottom sheet
+                          context.read<selectsub_category>().select_subcategory(category.title);
                           Navigator.pop(context, category);
                         },
                       );
@@ -1125,14 +1127,16 @@ class _addexpenceState extends State<addexpence> {
                                       Row(
                                         children: [
                                           SizedBox(width: 20),
-                                          Text(
-                                            "₹00.00",
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white,
-                                              fontSize: 35,
-                                            ),
-                                          ),
+                                          Consumer<addexpense>(builder: (context,addexpense,child){
+                                            return Text(
+                                              "₹ ${addexpense.moneyvalue}",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white,
+                                                fontSize: 35,
+                                              ),
+                                            );
+                                          }),
                                         ],
                                       ),
                                     ],
@@ -1217,17 +1221,19 @@ class _addexpenceState extends State<addexpence> {
 
                                     Spacer(),
 
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10.0),
-                                      child: Text(
-                                        "Food",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                          fontSize: 15,
+                                    Consumer<selectcategory>(builder: (context,cateory,child){
+                                      return Padding(
+                                        padding: const EdgeInsets.only(right: 10.0),
+                                        child: Text(
+                                          "${cateory.selecttedcategory}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    }),
                                     SizedBox(width: 10),
                                   ],
                                 ),
@@ -1267,17 +1273,20 @@ class _addexpenceState extends State<addexpence> {
                                       ],
                                     ),
                                     Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10.0),
-                                      child: Text(
-                                        "Snacks",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                          fontSize: 15,
+                                    Consumer<selectsub_category>(builder: (context,subcategory,child){
+                                      return  Padding(
+                                        padding: const EdgeInsets.only(right: 10.0),
+                                        child: Text(
+                                          "${subcategory.selecttedsubcategory}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    }),
+
                                     SizedBox(width: 10),
                                   ],
                                 ),
@@ -1413,17 +1422,19 @@ class _addexpenceState extends State<addexpence> {
                                     ),
                                     Spacer(),
 
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10.0),
-                                      child: Text(
-                                        "UPI",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                          fontSize: 15,
+                                    Consumer<select_paymentmethod>(builder: (context,paymentmethod,child){
+                                      return Padding(
+                                        padding: const EdgeInsets.only(right: 10.0),
+                                        child:  Text(
+                                          "${paymentmethod.selecttepaymentdcategory}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    }),
                                     SizedBox(width: 10),
                                   ],
                                 ),
@@ -1862,7 +1873,7 @@ class _addexpenceState extends State<addexpence> {
 
                       textInputAction: TextInputAction.done, // Shows the check/done button on the keyboard
                       onSubmitted: (value) {
-                        // Call your function here when the check button is clicked
+                        context.read<addexpense>().increse(value);
                         Navigator.pop(context);
                       },
 

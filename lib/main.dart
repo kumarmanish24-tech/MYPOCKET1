@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:mypocket/state_provider/provider_for_addexpense.dart';
 import 'package:mypocket/state_provider/provider_for_addmoney_page.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +22,11 @@ void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => Addmoney()),
-      ChangeNotifierProvider(create: (_) => TimeModel()),
+      ChangeNotifierProvider(create: (_) => addexpense()),
+      ChangeNotifierProvider(create: (_) => selectcategory()),
+      ChangeNotifierProvider(create: (_) => selectsub_category()),
+      ChangeNotifierProvider(create: (_) => select_paymentmethod()),
+
       ChangeNotifierProvider(create: (_) => Receivedmoneyfrommethod()),
       ChangeNotifierProvider(create: (_) => ReceivedmoneyViamethod()),
 
