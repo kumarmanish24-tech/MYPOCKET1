@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mypocket/state_provider/provider_for_addexpense.dart';
 import 'package:mypocket/ui/add_expance.dart';
 import 'package:mypocket/ui/component/glowingbutton.dart';
@@ -31,6 +32,8 @@ class addexpence extends StatefulWidget {
 }
 
 class _addexpenceState extends State<addexpence> {
+
+  DateTime now = DateTime.now();
 
 
 
@@ -1050,12 +1053,9 @@ class _addexpenceState extends State<addexpence> {
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
             child: ElevatedButton(style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black, // Button background color
-              foregroundColor: Colors.white, // Text/icon color
-              side: const BorderSide(
-                color: Colors.white54, // Border color
-                width: 1.5,         // Border thickness
-              ),
+              backgroundColor: Colors.white70, // Button background color
+              foregroundColor: Colors.black, // Text/icon color
+
 
             )
                 ,
@@ -1327,7 +1327,8 @@ class _addexpenceState extends State<addexpence> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10.0),
                                       child: Text(
-                                        "Sun, 4 October 2026",
+                                        "${DateFormat('dd-MMM-yyyy').format(_selectedDate ?? DateTime.now())}"
+                                        ,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -1376,7 +1377,7 @@ class _addexpenceState extends State<addexpence> {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10.0),
                                       child: Text(
-                                        "8:19 pm",
+                                        "${_selectedTime?.format(context) ?? DateFormat('hh:mm a').format(now) }",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           color: Colors.white,
@@ -1566,17 +1567,19 @@ class _addexpenceState extends State<addexpence> {
                                       ],
                                     ),
                                     Spacer(),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 10.0),
-                                      child: Text(
-                                        "Mohan Samose Wala",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white,
-                                          fontSize: 15,
+                                    Consumer<addshopename>(builder: (context,shopename,child){
+                                      return Padding(
+                                        padding: const EdgeInsets.only(right: 10.0),
+                                        child: Text(
+                                          "${shopename.shopname}",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                          ),
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    }),
                                     SizedBox(width: 10),
                                   ],
                                 ),
@@ -1979,14 +1982,14 @@ class _addexpenceState extends State<addexpence> {
 
               Row(
                 children: [
-                  SizedBox(width: 80,),
+                  SizedBox(width: 100,),
 
                   Expanded(
                     child: TextField(
 
                       textInputAction: TextInputAction.done, // Shows the check/done button on the keyboard
                       onSubmitted: (value) {
-                        // Call your function here when the check button is clicked
+                        context.read<addshopename>().shopenameadd(value);
                         Navigator.pop(context);
                       },
 
@@ -1994,18 +1997,13 @@ class _addexpenceState extends State<addexpence> {
                       // Sets the style of the text the user types
                       style: const TextStyle(
                         fontSize: 35.0,                  // Large font size matching the image
-                        fontWeight: FontWeight.w500,     // Bold styling
+                        // fontWeight: FontWeight.w500,     // Bold styling
                         color: Colors.white,             // Adjust color to contrast with your background
                       ),
                        // Forces numeric keyboard for currency
                       decoration: InputDecoration(
                         // Places a non-editable Rupee symbol right before the input text
-                        prefixText: 'Mr ',
-                        prefixStyle: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
+
                         hintText: 'Type name',                   // Placeholder when empty
                         hintStyle: const TextStyle(
                           fontSize: 30,

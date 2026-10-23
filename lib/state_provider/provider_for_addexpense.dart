@@ -11,6 +11,17 @@ class addexpense with ChangeNotifier{
   }
 
 }
+class addshopename with ChangeNotifier{
+
+  String _name = "None";
+  String get shopname => _name;
+
+  void shopenameadd (String newvalue){
+    _name = newvalue;
+    notifyListeners();
+  }
+
+}
 
 class selectcategory with ChangeNotifier{
 

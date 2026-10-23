@@ -26,6 +26,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => selectcategory()),
       ChangeNotifierProvider(create: (_) => selectsub_category()),
       ChangeNotifierProvider(create: (_) => select_paymentmethod()),
+      ChangeNotifierProvider(create: (_) => addshopename()),
 
       ChangeNotifierProvider(create: (_) => Receivedmoneyfrommethod()),
       ChangeNotifierProvider(create: (_) => ReceivedmoneyViamethod()),
