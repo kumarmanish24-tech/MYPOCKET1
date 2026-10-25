@@ -1053,7 +1053,7 @@ class _addexpenceState extends State<addexpence> {
           Padding(
             padding: const EdgeInsets.only(right: 15.0),
             child: ElevatedButton(style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.white70, // Button background color
+              backgroundColor: Colors.white, // Button background color
               foregroundColor: Colors.black, // Text/icon color
 
 

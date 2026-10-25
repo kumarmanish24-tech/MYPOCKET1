@@ -1,8 +1,12 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mypocket/ui/add_expance.dart';
 import 'package:mypocket/ui/addmoney.dart';
+import 'package:mypocket/ui/component/camelacontrol.dart';
+import 'package:mypocket/ui/component/dropmenu_for_history_page.dart';
+import 'package:mypocket/ui/component/radiobuttonfordatetimeintransactionhistory.dart';
 import 'package:mypocket/ui/ex1.dart';
 import 'package:mypocket/ui/view_expance.dart';
 import 'ex.dart';
@@ -33,6 +37,7 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
   // Dummy pages for demonstration
   late final List<Widget> _pages = [
     const homeui(),
+
     Center(child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -43,25 +48,8 @@ class _FloatingNavBarScreenState extends State<FloatingNavBarScreen> {
         )
       ],
     )),
-    Center(child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Center(
-          child: Column(
-            children: [
-              Text("24"),
-              SizedBox(height: 200,),
-              FloatingActionButton(onPressed: (){
+    const history(),
 
-                Navigator.push(context, MaterialPageRoute(builder: (context) => stateprovider()));
-              },
-                child: Icon(Icons.add),
-              )
-            ],
-          ),
-        )
-      ],
-    )),
     Center(child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -176,6 +164,523 @@ class homeui extends StatefulWidget {
   @override
   State<homeui> createState() => _homeuiState();
 }
+
+
+// -------------------------------History_ui----------------------------
+
+class CategoryItem {
+  final String title;
+  final IconData icon;
+  final Color color;
+  final String price;
+
+  const CategoryItem({
+    required this.title,
+    required this.price,
+    required this.icon,
+    required this.color,
+  });
+}
+
+class history extends StatefulWidget {
+  const history({super.key});
+
+  @override
+  State<history> createState() => _historyState();
+}
+
+class _historyState extends State<history> {
+
+  String? _selectedOption;
+
+  void _showDateFilterBottomSheet(BuildContext context) {
+    // Temporary selection variable to manage state inside bottom sheet
+    String? tempSelection = _selectedOption;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Title and Close Button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Date',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.close, color: Colors.white70),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Options List
+                  _buildRadioOption(
+                    title: 'This month',
+                    value: 'This month',
+                    groupValue: tempSelection,
+                    onChanged: (val) {
+                      setModalState(() => tempSelection = val);
+                    },
+                  ),
+                  _buildRadioOption(
+                    title: 'Last 30 days',
+                    value: 'Last 30 days',
+                    groupValue: tempSelection,
+                    onChanged: (val) {
+                      setModalState(() => tempSelection = val);
+                    },
+                  ),
+                  _buildRadioOption(
+                    title: 'Last 90 days',
+                    value: 'Last 90 days',
+                    groupValue: tempSelection,
+                    onChanged: (val) {
+                      setModalState(() => tempSelection = val);
+                    },
+                  ),
+                  const SizedBox(height: 24),
+
+
+                  SizedBox(
+                    width: double.infinity,
+                    height: 52,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _selectedOption = tempSelection;
+                        });
+                        Navigator.pop(context, tempSelection);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFA8C7FA), // Light blue tint
+                        foregroundColor: const Color(0xFF042E6F), // Dark blue text
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(26),
+                        ),
+                      ),
+                      child: const Text(
+                        'Apply',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+
+
+                  SizedBox(
+                    width: double.infinity,
+                    height: 52,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        setModalState(() {
+                          tempSelection = null;
+                        });
+                        setState(() {
+                          _selectedOption = null;
+                        });
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.white38, width: 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(26),
+                        ),
+                      ),
+                      child: const Text(
+                        'Clear all',
+                        style: TextStyle(
+                          color: Color(0xFFA8C7FA),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // Custom Radio Option Row Component
+  Widget _buildRadioOption({
+    required String title,
+    required String value,
+    required String? groupValue,
+    required ValueChanged<String?> onChanged,
+  }) {
+    final bool isSelected = value == groupValue;
+
+    return InkWell(
+      onTap: () => onChanged(value),
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: isSelected ? const Color(0xFFA8C7FA) : Colors.white70,
+                  width: isSelected ? 7 : 2, // Thicker border gives the radio dot look
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+  final List<CategoryItem> _paymentMethods = const [
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+    CategoryItem(
+      title: 'Food',
+      price: '₹ 540',
+      icon: Icons.emoji_food_beverage,
+      color: Colors.green,
+    ),
+    CategoryItem(
+      title: 'Education',
+      price: '₹ 1140',
+      icon: Icons.receipt,
+      color: Colors.indigo,
+    ),
+    CategoryItem(
+      title: 'Entertainment',
+      price: '₹ 30',
+      icon: Icons.airplay_sharp,
+      color: Colors.blue,
+    ),
+
+
+  ];
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar( scrolledUnderElevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black12 ,
+        title:  Padding(
+          padding: const EdgeInsets.only(left: 5.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Transaction History",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+              Text(
+                "Track every rupee",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white54,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ) ,
+
+      ),
+      backgroundColor: Colors.black12,
+      body: Center(
+
+
+        child: Column(
+
+
+          children: [
+
+            SizedBox(
+              height: 50,
+              width: 360,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+
+                    SizedBox(width: 16,),
+
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF1E1E1E),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12), // Custom corner radius value
+                      ),
+
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1,
+                        // Border thickness
+                      ),
+
+                    ),onPressed:(){
+
+
+
+                    }, child: Text("date & time")),
+                    SizedBox(width: 16,),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF1E1E1E),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12), // Custom corner radius value
+                      ),
+
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1,
+                        // Border thickness
+                      ),
+
+                    ),
+                        onPressed: () => _showDateFilterBottomSheet(context),
+                        child: Text("payment method")),
+                    SizedBox(width: 16,),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF1E1E1E),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12), // Custom corner radius value
+                      ),
+
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1,
+                        // Border thickness
+                      ),
+
+                    ),onPressed:(){
+
+                    }, child: Text("amount")),
+                    SizedBox(width: 16,),
+                    ElevatedButton(style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF1E1E1E),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12), // Custom corner radius value
+                      ),
+
+                      side: const BorderSide(
+                        color: Colors.white54, // Border color
+                        width: 1,
+                        // Border thickness
+                      ),
+
+                    ),onPressed:(){
+
+                    }, child: Text("payment type")),
+
+
+
+
+
+
+
+
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 5,),
+            Container(
+              width: double.infinity,
+              height: 580,
+
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: Flexible(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: _paymentMethods.length,
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Colors.white12,
+                    height: 8,
+                    indent: 20,
+                    endIndent: 20,
+                  ),
+                  itemBuilder: (context, index) {
+                    final category = _paymentMethods[index];
+                    return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: category.color.withValues(alpha: 0.15),
+                          child: Icon(category.icon, color: category.color),
+                        ),
+                        title: Text(
+                          category.title,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+
+                        trailing: Text(category.price, style: const TextStyle(color: Colors.white,fontSize: 15),)
+                    );
+                  },
+                ),
+              ),
+
+            ),
+
+
+
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 
 class _homeuiState extends State<homeui> {
 
@@ -692,7 +1197,7 @@ class _homeuiState extends State<homeui> {
                   // Navigator.push(
                   //   context,
                   //   PageRouteBuilder(
-                  //     pageBuilder: (context, animation, secondaryAnimation) =>  Example(),
+                  //     pageBuilder: (context, animation, secondaryAnimation) =>  TakePictureScreen(),
                   //     transitionDuration: Duration.zero,        // Removes entry animation
                   //     reverseTransitionDuration: Duration.zero, // Removes exit/back animation
                   //   ),
@@ -792,6 +1297,10 @@ class _homeuiState extends State<homeui> {
 
 
 }
+
+
+
+
 
 
 
