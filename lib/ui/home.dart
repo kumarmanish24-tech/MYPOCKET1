@@ -9,6 +9,7 @@ import 'package:mypocket/ui/component/dropmenu_for_history_page.dart';
 import 'package:mypocket/ui/component/radiobuttonfordatetimeintransactionhistory.dart';
 import 'package:mypocket/ui/ex1.dart';
 import 'package:mypocket/ui/view_expance.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'ex.dart';
 
 class FloatingNavBarScreen extends StatefulWidget {
@@ -1260,6 +1261,728 @@ class _historyState extends State<history> {
       },
     );
   }
+  void showMultiSelectBottomSheetforcategoryfilture(BuildContext context) {
+
+
+
+
+
+
+
+    final List<String> items = ['Food & Dining', 'Transport', 'Shopping','Housing','Education','Health & Medical','Entertainment','Bills & Utilities', 'Other',];
+    final Set<String> selectedItems = {};
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (BuildContext context) {
+        // 1. Wrap the content in a StatefulBuilder
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Container(
+
+              height: 400,
+              child: Padding(
+                padding:  EdgeInsets.fromLTRB(24, 20, 24, 32),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Select Category',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.close, color: Colors.white70),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                      ],
+                    ),
+
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          final isSelected = selectedItems.contains(item);
+
+                          return CheckboxListTile(
+                            checkboxShape: const CircleBorder(),
+                            title: Text(item),
+                            value: isSelected,
+
+                            onChanged: (bool? value) {
+                              setModalState(() {
+                                if (value == true) {
+                                  selectedItems.add(item);
+                                } else {
+                                  selectedItems.remove(item);
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1E1E1E),
+                            foregroundColor: Colors.white, // Text/icon color
+                            side: const BorderSide(
+                              color: Colors.white54, // Border color
+                              width: 1.5, // Border thickness
+                            ),
+                          ),
+                          onPressed: () {
+                            setModalState(() {
+
+                            });
+                            setState(() {
+                              _selectedOption = null;
+                            });
+                          },
+                          child: Text("Clear all"),
+                        ),
+                        Spacer(),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                            Colors.white70, // Button background color
+                            foregroundColor: Colors.black, // Text/icon color
+                          ),
+                          onPressed: () {
+                            setState(() {
+
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Text("Apply"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+  void showMultiSelectBottomSheetfortransactiontypefilture(BuildContext context) {
+
+
+
+
+
+
+
+    final List<String> items = ['Money Received', 'Money Spent', 'Transfers',];
+    final Set<String> selectedItems = {};
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (BuildContext context) {
+        // 1. Wrap the content in a StatefulBuilder
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Container(
+
+              height: 400,
+              child: Padding(
+                padding:  EdgeInsets.fromLTRB(24, 20, 24, 32),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Select Category',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.close, color: Colors.white70),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                      ],
+                    ),
+
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          final isSelected = selectedItems.contains(item);
+
+                          return CheckboxListTile(
+                            checkboxShape: const CircleBorder(),
+                            title: Text(item),
+                            value: isSelected,
+
+                            onChanged: (bool? value) {
+                              setModalState(() {
+                                if (value == true) {
+                                  selectedItems.add(item);
+                                } else {
+                                  selectedItems.remove(item);
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1E1E1E),
+                            foregroundColor: Colors.white, // Text/icon color
+                            side: const BorderSide(
+                              color: Colors.white54, // Border color
+                              width: 1.5, // Border thickness
+                            ),
+                          ),
+                          onPressed: () {
+                            setModalState(() {
+
+                            });
+                            setState(() {
+                              _selectedOption = null;
+                            });
+                          },
+                          child: Text("Clear all"),
+                        ),
+                        Spacer(),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                            Colors.white70, // Button background color
+                            foregroundColor: Colors.black, // Text/icon color
+                          ),
+                          onPressed: () {
+                            setState(() {
+
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Text("Apply"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+  void showMultiSelectBottomSheetforSortbyfilture(BuildContext context) {
+
+
+
+
+
+
+
+    final List<String> items = ['Newest First', 'Oldest First', 'Highest to Lowest','Lowest to Highest'];
+    final Set<String> selectedItems = {};
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (BuildContext context) {
+        // 1. Wrap the content in a StatefulBuilder
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Container(
+
+              height: 400,
+              child: Padding(
+                padding:  EdgeInsets.fromLTRB(24, 20, 24, 32),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Select Category',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.close, color: Colors.white70),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                      ],
+                    ),
+
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          final isSelected = selectedItems.contains(item);
+
+                          return CheckboxListTile(
+                            checkboxShape: const CircleBorder(),
+                            title: Text(item),
+                            value: isSelected,
+
+                            onChanged: (bool? value) {
+                              setModalState(() {
+                                if (value == true) {
+                                  selectedItems.add(item);
+                                } else {
+                                  selectedItems.remove(item);
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1E1E1E),
+                            foregroundColor: Colors.white, // Text/icon color
+                            side: const BorderSide(
+                              color: Colors.white54, // Border color
+                              width: 1.5, // Border thickness
+                            ),
+                          ),
+                          onPressed: () {
+                            setModalState(() {
+
+                            });
+                            setState(() {
+                              _selectedOption = null;
+                            });
+                          },
+                          child: Text("Clear all"),
+                        ),
+                        Spacer(),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                            Colors.white70, // Button background color
+                            foregroundColor: Colors.black, // Text/icon color
+                          ),
+                          onPressed: () {
+                            setState(() {
+
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Text("Apply"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+
+
+  // void showMultiSelectBottomSheetforAmountfilture(BuildContext context) {
+  //   final List<String> items = ['Under ₹100', '₹100–₹500', '₹500–₹1,000'];
+  //   final Set<String> selectedItems = {};
+  //
+  //
+  //   final TextEditingController minController = TextEditingController();
+  //   final TextEditingController maxController = TextEditingController();
+  //
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+  //     ),
+  //     builder: (BuildContext context) {
+  //       return StatefulBuilder(
+  //         builder: (BuildContext context, StateSetter setModalState) {
+  //           return Container(
+  //             height: 480, // Adjusted height to accommodate text fields
+  //             child: Padding(
+  //               padding: EdgeInsets.fromLTRB(
+  //                   24,
+  //                   20,
+  //                   24,
+  //                   MediaQuery.of(context).viewInsets.bottom + 20
+  //               ),
+  //               child: Column(
+  //                 children: [
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                     children: [
+  //                       const Text(
+  //                         'Select Category & Price',
+  //                         style: TextStyle(
+  //                           color: Colors.white,
+  //                           fontSize: 20,
+  //                           fontWeight: FontWeight.w500,
+  //                         ),
+  //                       ),
+  //                       IconButton(
+  //                         onPressed: () => Navigator.pop(context),
+  //                         icon: const Icon(Icons.close, color: Colors.white70),
+  //                         padding: EdgeInsets.zero,
+  //                         constraints: const BoxConstraints(),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   const SizedBox(height: 16),
+  //
+  //
+  //                   Row(
+  //                     children: [
+  //                       Expanded(
+  //                         child: TextField(
+  //                           controller: minController,
+  //                           keyboardType: TextInputType.number,
+  //                           style: const TextStyle(color: Colors.white),
+  //                           decoration: InputDecoration(
+  //                             labelText: 'Min Price (₹)',
+  //                             labelStyle: const TextStyle(color: Colors.white70),
+  //                             enabledBorder: OutlineInputBorder(
+  //                               borderSide: const BorderSide(color: Colors.white54),
+  //                               borderRadius: BorderRadius.circular(12),
+  //                             ),
+  //                             focusedBorder: OutlineInputBorder(
+  //                               borderSide: const BorderSide(color: Colors.white),
+  //                               borderRadius: BorderRadius.circular(12),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       const SizedBox(width: 16),
+  //                       Expanded(
+  //                         child: TextField(
+  //                           controller: maxController,
+  //                           keyboardType: TextInputType.number,
+  //                           style: const TextStyle(color: Colors.white),
+  //                           decoration: InputDecoration(
+  //                             labelText: 'Max Price (₹)',
+  //                             labelStyle: const TextStyle(color: Colors.white70),
+  //                             enabledBorder: OutlineInputBorder(
+  //                               borderSide: const BorderSide(color: Colors.white54),
+  //                               borderRadius: BorderRadius.circular(12),
+  //                             ),
+  //                             focusedBorder: OutlineInputBorder(
+  //                               borderSide: const BorderSide(color: Colors.white),
+  //                               borderRadius: BorderRadius.circular(12),
+  //                             ),
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                   const SizedBox(height: 16),
+  //
+  //                   Expanded(
+  //                     child: ListView.builder(
+  //                       itemCount: items.length,
+  //                       itemBuilder: (context, index) {
+  //                         final item = items[index];
+  //                         final isSelected = selectedItems.contains(item);
+  //
+  //                         return CheckboxListTile(
+  //                           checkboxShape: const CircleBorder(),
+  //                           title: Text(
+  //                             item,
+  //                             style: const TextStyle(color: Colors.white),
+  //                           ),
+  //                           value: isSelected,
+  //                           onChanged: (bool? value) {
+  //                             setModalState(() {
+  //                               if (value == true) {
+  //                                 selectedItems.add(item);
+  //                               } else {
+  //                                 selectedItems.remove(item);
+  //                               }
+  //                             });
+  //                           },
+  //                         );
+  //                       },
+  //                     ),
+  //                   ),
+  //
+  //                   const SizedBox(height: 12),
+  //
+  //                   Row(
+  //                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                     children: [
+  //                       ElevatedButton(
+  //                         style: ElevatedButton.styleFrom(
+  //                           backgroundColor: const Color(0xFF1E1E1E),
+  //                           foregroundColor: Colors.white,
+  //                           side: const BorderSide(
+  //                             color: Colors.white54,
+  //                             width: 1.5,
+  //                           ),
+  //                         ),
+  //                         onPressed: () {
+  //                           setModalState(() {
+  //                             selectedItems.clear();
+  //                             minController.clear();
+  //                             maxController.clear();
+  //                           });
+  //                         },
+  //                         child: const Text("Clear all"),
+  //                       ),
+  //                       const Spacer(),
+  //                       ElevatedButton(
+  //                         style: ElevatedButton.styleFrom(
+  //                           backgroundColor: Colors.white70,
+  //                           foregroundColor: Colors.black,
+  //                         ),
+  //                         onPressed: () {
+  //                           // You can read entered values here:
+  //                           // final min = minController.text;
+  //                           // final max = maxController.text;
+  //                           Navigator.pop(context);
+  //                         },
+  //                         child: const Text("Apply"),
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //           );
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
+  void showMultiSelectBottomSheetforAmountfilture(BuildContext context) {
+    final List<String> items = ['Under ₹100', '₹100–₹500', '₹500–₹1,000'];
+    final Set<String> selectedItems = {};
+
+    final TextEditingController minController = TextEditingController();
+    final TextEditingController maxController = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (BuildContext context) {
+        // Moves the bottom sheet up dynamically with the keyboard
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setModalState) {
+              // Allows the sheet contents to scroll when the keyboard is open
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min, // Wrap content dynamically
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Select Category & Price',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: const Icon(Icons.close, color: Colors.white70),
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+
+                      // Min and Max Price TextFields in a Row
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: minController,
+                              keyboardType: TextInputType.number,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                labelText: 'Min Price (₹)',
+                                labelStyle: const TextStyle(color: Colors.white70),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Colors.white54),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: TextField(
+                              controller: maxController,
+                              keyboardType: TextInputType.number,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                labelText: 'Max Price (₹)',
+                                labelStyle: const TextStyle(color: Colors.white70),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Colors.white54),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+
+                      // Replaced Expanded with shrinkWrap ListView for scroll safety
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          final isSelected = selectedItems.contains(item);
+
+                          return CheckboxListTile(
+                            checkboxShape: const CircleBorder(),
+                            title: Text(
+                              item,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            value: isSelected,
+                            onChanged: (bool? value) {
+                              setModalState(() {
+                                if (value == true) {
+                                  selectedItems.add(item);
+                                } else {
+                                  selectedItems.remove(item);
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF1E1E1E),
+                              foregroundColor: Colors.white,
+                              side: const BorderSide(
+                                color: Colors.white54,
+                                width: 1.5,
+                              ),
+                            ),
+                            onPressed: () {
+                              setModalState(() {
+                                selectedItems.clear();
+                                minController.clear();
+                                maxController.clear();
+                              });
+                            },
+                            child: const Text("Clear all"),
+                          ),
+                          const Spacer(),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white70,
+                              foregroundColor: Colors.black,
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Apply"),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
 
 
 
@@ -1524,7 +2247,7 @@ class _historyState extends State<history> {
                           // Border thickness
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () => showMultiSelectBottomSheetforAmountfilture(context),
                       child: Text("Amount"),
                     ),
                     SizedBox(width: 16),
@@ -1544,7 +2267,8 @@ class _historyState extends State<history> {
                           // Border thickness
                         ),
                       ),
-                      onPressed: () {},
+
+                        onPressed: () => showMultiSelectBottomSheetforcategoryfilture(context),
                       child: Text("Category"),
                     ),
                     SizedBox(width: 16),
@@ -1564,7 +2288,8 @@ class _historyState extends State<history> {
                           // Border thickness
                         ),
                       ),
-                      onPressed: () {},
+
+                        onPressed: () => showMultiSelectBottomSheetfortransactiontypefilture(context),
                       child: Text("Transaction Type"),
                     ),
                     SizedBox(width: 16),
@@ -1584,9 +2309,10 @@ class _historyState extends State<history> {
                           // Border thickness
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () => showMultiSelectBottomSheetforSortbyfilture(context),
                       child: Text("Sort By"),
                     ),
+
                   ],
                 ),
               ),

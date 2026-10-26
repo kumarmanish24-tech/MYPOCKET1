@@ -472,6 +472,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: e2a87c7560af15bce6f05983c65dd598953d24132d1a5cf4675928aa76198a34
+      url: "https://pub.dev"
+    source: hosted
+    version: "35.1.41"
+  syncfusion_flutter_sliders:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_sliders
+      sha256: "170b0f806d28b0611979af0dcc29c93a549007b1dae91c0feff5d4b4e8c33372"
+      url: "https://pub.dev"
+    source: hosted
+    version: "35.1.41"
   table_calendar:
     dependency: "direct main"
     description:
