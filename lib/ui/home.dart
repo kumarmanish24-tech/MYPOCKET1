@@ -982,6 +982,8 @@ class CategoryItem {
   });
 }
 
+
+
 class history extends StatefulWidget {
   const history({super.key});
 
@@ -1035,7 +1037,6 @@ class _historyState extends State<history> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF2C2B2B),
@@ -1049,7 +1050,7 @@ class _historyState extends State<history> {
                         child: Row(
                           children: [
                             Icon(Icons.calendar_month_rounded),
-                            SizedBox(width: 10,),
+                            SizedBox(width: 10),
                             Text("Custom date"),
                           ],
                         ),
@@ -1133,6 +1134,137 @@ class _historyState extends State<history> {
     );
   }
 
+
+
+  void showMultiSelectBottomSheetforpaymentfilture(BuildContext context) {
+
+
+
+
+
+
+    final List<String> items = ['Cash', 'UPI', 'Bank Transfer','EMI','Debit Card','Cheque','Gift Card','Other', 'Credit Card', 'Mobile Wallet'];
+    final Set<String> selectedItems = {};
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (BuildContext context) {
+        // 1. Wrap the content in a StatefulBuilder
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            return Container(
+
+              height: 400,
+              child: Padding(
+                padding:  EdgeInsets.fromLTRB(24, 20, 24, 32),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Payment Method',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.close, color: Colors.white70),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
+                        ),
+                      ],
+                    ),
+
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          final isSelected = selectedItems.contains(item);
+
+                          return CheckboxListTile(
+                            checkboxShape: const CircleBorder(),
+                            title: Text(item),
+                            value: isSelected,
+
+                            onChanged: (bool? value) {
+                              setModalState(() {
+                                if (value == true) {
+                                  selectedItems.add(item);
+                                } else {
+                                  selectedItems.remove(item);
+                                }
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    const SizedBox(height: 12),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF1E1E1E),
+                            foregroundColor: Colors.white, // Text/icon color
+                            side: const BorderSide(
+                              color: Colors.white54, // Border color
+                              width: 1.5, // Border thickness
+                            ),
+                          ),
+                          onPressed: () {
+                            setModalState(() {
+
+                            });
+                            setState(() {
+                              _selectedOption = null;
+                            });
+                          },
+                          child: Text("Clear all"),
+                        ),
+                        Spacer(),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                            Colors.white70, // Button background color
+                            foregroundColor: Colors.black, // Text/icon color
+                          ),
+                          onPressed: () {
+                            setState(() {
+
+                            });
+                            Navigator.pop(context);
+                          },
+                          child: Text("Apply"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+
+
+
+
   // Custom Radio Option Row Component
   Widget _buildRadioOption({
     required String title,
@@ -1148,7 +1280,6 @@ class _historyState extends State<history> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 14),
         child: Row(
-
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -1351,7 +1482,7 @@ class _historyState extends State<history> {
                         ),
                       ),
                       onPressed: () => _showDateFilterBottomSheet(context),
-                      child: Text("date & time"),
+                      child: Text("Date & Time"),
                     ),
                     SizedBox(width: 16),
                     ElevatedButton(
@@ -1370,8 +1501,10 @@ class _historyState extends State<history> {
                           // Border thickness
                         ),
                       ),
-                      onPressed: () => _showDateFilterBottomSheet(context),
-                      child: Text("payment method"),
+
+
+                      onPressed: () => showMultiSelectBottomSheetforpaymentfilture(context),
+                      child: Text("Payment Method"),
                     ),
                     SizedBox(width: 16),
 
@@ -1483,7 +1616,9 @@ class _historyState extends State<history> {
                       final category = _paymentMethods[index];
                       return ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: category.color.withValues(alpha: 0.15),
+                          backgroundColor: category.color.withValues(
+                            alpha: 0.15,
+                          ),
                           child: Icon(category.icon, color: category.color),
                         ),
                         title: Text(
@@ -1509,7 +1644,10 @@ class _historyState extends State<history> {
       ),
     );
   }
+
+  CategoryItem1({required String title, required IconData icon, required MaterialColor color}) {}
 }
+
 
 class CustomContainericon extends StatelessWidget {
   final Icon icon;
