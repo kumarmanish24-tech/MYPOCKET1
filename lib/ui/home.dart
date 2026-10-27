@@ -10,6 +10,7 @@ import 'package:mypocket/ui/component/radiobuttonfordatetimeintransactionhistory
 import 'package:mypocket/ui/ex1.dart';
 import 'package:mypocket/ui/view_expance.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'ex.dart';
 
 class FloatingNavBarScreen extends StatefulWidget {
@@ -996,137 +997,178 @@ class _historyState extends State<history> {
   String? _selectedOption;
 
   void _showDateFilterBottomSheet(BuildContext context) {
-    // Temporary selection variable to manage state inside bottom sheet
     String? tempSelection = _selectedOption;
+
+    CalendarFormat calendarFormat = CalendarFormat.week;
+    DateTime focusedDay = DateTime.now();
+    DateTime? selectedDay = DateTime.now(); // Default selected day
+
+    final Map<DateTime, List<String>> events = {
+      DateTime.utc(2026, 10, 15): ['Client Presentation', 'Team Lunch'],
+      DateTime.utc(2026, 10, 20): ['Product Release Checkup'],
+      DateTime.utc(2026, 10, 11): ['Foods'],
+    };
+
+    List<String> getEventsForDay(DateTime day) {
+      return events[DateTime.utc( day.month,)] ?? [];
+    }
 
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFF2C2B2B), // Dark background color
+      backgroundColor: const Color(0xFF2C2B2B),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
       ),
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title and Close Button
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Date',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.close, color: Colors.white70),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF2C2B2B),
-                          foregroundColor: Colors.white, // Text/icon color
-                          side: const BorderSide(
-                            color: Colors.white54, // Border color
-                            width: 1.5, // Border thickness
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Title and Close Button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Date',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            Icon(Icons.calendar_month_rounded),
-                            SizedBox(width: 10),
-                            Text("Custom date"),
-                          ],
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.close, color: Colors.white70),
+                          padding: EdgeInsets.zero,
+                          constraints: const BoxConstraints(),
                         ),
+                      ],
+                    ),
+
+                    // Table Calendar
+                    TableCalendar<String>(
+                      firstDay: DateTime.utc(2020, 1, 1),
+                      lastDay: DateTime.utc(2030, 12, 31),
+                      focusedDay: focusedDay,
+
+                      calendarFormat: calendarFormat,
+                      selectedDayPredicate: (day) => isSameDay(selectedDay, day),
+                      onDaySelected: (newSelectedDay, newFocusedDay) {
+                        setModalState(() {
+                          selectedDay = newSelectedDay;
+                          focusedDay = newFocusedDay;
+                        });
+                      },
+                      onFormatChanged: (format) {
+                        setModalState(() {
+                          calendarFormat = format;
+                        });
+                      },
+                      onPageChanged: (newFocusedDay) {
+                        focusedDay = newFocusedDay;
+                      },
+                      eventLoader: getEventsForDay,
+                      calendarStyle: const CalendarStyle(
+                        todayDecoration: BoxDecoration(
+                          color: Colors.indigoAccent,
+                          shape: BoxShape.circle,
+                        ),
+                        selectedDecoration: BoxDecoration(
+                          color: Colors.indigo,
+                          shape: BoxShape.circle,
+                        ),
+                        markerDecoration: BoxDecoration(
+                          color: Colors.deepOrange,
+                          shape: BoxShape.circle,
+                        ),
+                        defaultTextStyle: TextStyle(color: Colors.white),
+                        weekendTextStyle: TextStyle(color: Colors.white70),
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
+                      headerStyle: const HeaderStyle(
+                        formatButtonVisible: true,
+                        titleCentered: true,
+                        titleTextStyle: TextStyle(color: Colors.white, fontSize: 16),
+                        // iconColor: Colors.white,
+                      ),
+                    ),
 
-                  // Options List
-                  _buildRadioOption(
-                    title: 'This month',
-                    value: 'This month',
-                    groupValue: tempSelection,
-                    onChanged: (val) {
-                      setModalState(() => tempSelection = val);
-                    },
-                  ),
-                  _buildRadioOption(
-                    title: 'Last 30 days',
-                    value: 'Last 30 days',
-                    groupValue: tempSelection,
-                    onChanged: (val) {
-                      setModalState(() => tempSelection = val);
-                    },
-                  ),
-                  _buildRadioOption(
-                    title: 'Last 90 days',
-                    value: 'Last 90 days',
-                    groupValue: tempSelection,
-                    onChanged: (val) {
-                      setModalState(() => tempSelection = val);
-                    },
-                  ),
-                  const SizedBox(height: 12),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF1E1E1E),
-                          foregroundColor: Colors.white, // Text/icon color
-                          side: const BorderSide(
-                            color: Colors.white54, // Border color
-                            width: 1.5, // Border thickness
+                    const SizedBox(height: 8),
+
+                    // Options List
+                    _buildRadioOption(
+                      title: 'This month',
+                      value: 'This month',
+                      groupValue: tempSelection,
+                      onChanged: (val) {
+                        setModalState(() => tempSelection = val);
+                      },
+                    ),
+                    _buildRadioOption(
+                      title: 'Last 30 days',
+                      value: 'Last 30 days',
+                      groupValue: tempSelection,
+                      onChanged: (val) {
+                        setModalState(() => tempSelection = val);
+                      },
+                    ),
+                    _buildRadioOption(
+                      title: 'Last 90 days',
+                      value: 'Last 90 days',
+                      groupValue: tempSelection,
+                      onChanged: (val) {
+                        setModalState(() => tempSelection = val);
+                      },
+                    ),
+                    const SizedBox(height: 12),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF2C2B2B),
+                            foregroundColor: Colors.white,
+                            side: const BorderSide(
+                              color: Colors.white54,
+                              width: 1.5,
+                            ),
                           ),
+                          onPressed: () {
+                            setModalState(() {
+                              tempSelection = null;
+                              selectedDay = null;
+                            });
+                            setState(() {
+                              _selectedOption = null;
+                            });
+                          },
+                          child: const Text("Clear all"),
                         ),
-                        onPressed: () {
-                          setModalState(() {
-                            tempSelection = null;
-                          });
-                          setState(() {
-                            _selectedOption = null;
-                          });
-                        },
-                        child: Text("Clear all"),
-                      ),
-                      Spacer(),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              Colors.white70, // Button background color
-                          foregroundColor: Colors.black, // Text/icon color
+                        const Spacer(),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white70,
+                            foregroundColor: Colors.black,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _selectedOption = tempSelection;
+                            });
+                            Navigator.pop(context, tempSelection);
+                          },
+                          child: const Text("Apply"),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            _selectedOption = tempSelection;
-                          });
-                          Navigator.pop(context, tempSelection);
-                        },
-                        child: Text("Apply"),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             );
           },
@@ -1134,7 +1176,6 @@ class _historyState extends State<history> {
       },
     );
   }
-
 
 
   void showMultiSelectBottomSheetforpaymentfilture(BuildContext context) {
@@ -1218,7 +1259,7 @@ class _historyState extends State<history> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1E1E1E),
+                            backgroundColor: const Color(0xFF2C2B2B),
                             foregroundColor: Colors.white, // Text/icon color
                             side: const BorderSide(
                               color: Colors.white54, // Border color
@@ -1343,7 +1384,7 @@ class _historyState extends State<history> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1E1E1E),
+                            backgroundColor: const Color(0xFF2C2B2B),
                             foregroundColor: Colors.white, // Text/icon color
                             side: const BorderSide(
                               color: Colors.white54, // Border color
@@ -1419,7 +1460,7 @@ class _historyState extends State<history> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text(
-                          'Select Category',
+                          'Select type',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -1468,7 +1509,7 @@ class _historyState extends State<history> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1E1E1E),
+                            backgroundColor: const Color(0xFF2C2B2B),
                             foregroundColor: Colors.white, // Text/icon color
                             side: const BorderSide(
                               color: Colors.white54, // Border color
@@ -1593,7 +1634,7 @@ class _historyState extends State<history> {
                       children: [
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF1E1E1E),
+                            backgroundColor: const Color(0xFF2C2B2B),
                             foregroundColor: Colors.white, // Text/icon color
                             side: const BorderSide(
                               color: Colors.white54, // Border color

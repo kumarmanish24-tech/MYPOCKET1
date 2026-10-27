@@ -1057,3 +1057,233 @@
 //     );
 //   }
 // }
+
+
+
+
+// import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+// import 'package:flutter/material.dart';
+//
+// class Example extends StatefulWidget {
+//   @override
+//   State<Example> createState() => _ExampleState();
+// }
+//
+// class _ExampleState extends State<Example> {
+//   List<Container> cards = [
+//     Container(
+//         width: double.infinity,
+//         height: 80,
+//         decoration: BoxDecoration(
+//           color: Color.fromARGB(255, 30, 30, 30), // Note: Color must be inside BoxDecoration when using decoration
+//
+//           borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+//         ),
+//         child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//             SizedBox(width: 5,),
+//             Column(crossAxisAlignment: CrossAxisAlignment.center,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   height: 50,
+//                   width: 50,
+//                   decoration: BoxDecoration(
+//                     color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+//
+//                     borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
+//                   ),
+//                   child: Icon(Icons.directions_bus_rounded,color: Colors.white70,) ,
+//
+//
+//                 ),
+//               ],
+//             ),
+//             SizedBox(width: 1,),
+//             Column(mainAxisAlignment: MainAxisAlignment.center,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text("Travel",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+//                 Text("Bus 12:10AM",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+//
+//               ],
+//             ),
+//             SizedBox(width: 100,),
+//             Text("-155",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+//             SizedBox(width: 10,),
+//
+//
+//           ],
+//         )
+//     ),
+//     Container(
+//         width: double.infinity,
+//         height: 80,
+//         decoration: BoxDecoration(
+//           color: Color.fromARGB(255, 41, 41, 41), // Note: Color must be inside BoxDecoration when using decoration
+//
+//           borderRadius: BorderRadius.circular(20.0), // Adjust the double value for more/less curve
+//         ),
+//         child:  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//             SizedBox(width: 5,),
+//             Column(crossAxisAlignment: CrossAxisAlignment.center,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   height: 50,
+//                   width: 50,
+//                   decoration: BoxDecoration(
+//                     color: Colors.white12, // Note: Color must be inside BoxDecoration when using decoration
+//
+//                     borderRadius: BorderRadius.circular(50), // Adjust the double value for more/less curve
+//                   ),
+//                   child: Icon(Icons.directions_bus_rounded,color: Colors.white70,) ,
+//
+//
+//                 ),
+//               ],
+//             ),
+//             SizedBox(width: 1,),
+//             Column(mainAxisAlignment: MainAxisAlignment.center,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text("Travel",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+//                 Text("Bus 12:10AM",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 15),),
+//
+//               ],
+//             ),
+//             SizedBox(width: 100,),
+//             Text("-155",style: TextStyle(fontWeight: FontWeight.w500,color: Colors.white60,fontSize: 20),),
+//             SizedBox(width: 10,),
+//
+//
+//           ],
+//         )
+//     ),
+//
+//   ];
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Flexible(
+//         child: CardSwiper(
+//           backCardOffset: const Offset(0, -15),
+//
+//           allowedSwipeDirection: const AllowedSwipeDirection.symmetric(horizontal: true),
+//           scale: 0.96,
+//
+//
+//           cardsCount: cards.length,
+//           cardBuilder: (context, index, percentThresholdX, percentThresholdY) => cards[index],
+//         ),
+//       ),
+//     );
+//   }
+// }
+//
+//
+//
+//
+// class ModernSearchExample extends StatefulWidget {
+//   const ModernSearchExample({super.key});
+//
+//   @override
+//   State<ModernSearchExample> createState() => _ModernSearchExampleState();
+// }
+//
+// class _ModernSearchExampleState extends State<ModernSearchExample> {
+//   final List<String> _allItems = ['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry'];
+//   String _selectedItem = 'None';
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Material 3 Search')),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             Text('Selected: $_selectedItem', style: const TextStyle(fontSize: 18)),
+//             const SizedBox(height: 20),
+//             // SearchAnchor handles the overlay logic automatically
+//             SearchAnchor(
+//               builder: (BuildContext context, SearchController controller) {
+//                 return SearchBar(
+//                   controller: controller,
+//                   padding: const WidgetStatePropertyAll<EdgeInsets>(
+//                     EdgeInsets.symmetric(horizontal: 16.0),
+//                   ),
+//                   onTap: () => controller.openView(),
+//                   onChanged: (_) => controller.openView(),
+//                   leading: const Icon(Icons.search),
+//                   hintText: 'Search fruits...',
+//                 );
+//               },
+//               suggestionsBuilder: (BuildContext context, SearchController controller) {
+//                 final String query = controller.text.toLowerCase();
+//                 return _allItems
+//                     .where((item) => item.toLowerCase().contains(query))
+//                     .map((item) => ListTile(
+//                   title: Text(item),
+//                   onTap: () {
+//                     setState(() {
+//                       _selectedItem = item;
+//                       controller.closeView(item);
+//                     });
+//                   },
+//                 ))
+//                     .toList();
+//               },
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+import 'package:flutter/material.dart';
+import 'package:mypocket/state_provider/provider_for_addmoney_page.dart';
+import 'package:provider/provider.dart';
+
+class stateprovider extends StatefulWidget {
+  const stateprovider({super.key});
+
+  @override
+  State<stateprovider> createState() => _stateproviderState();
+}
+
+class _stateproviderState extends State<stateprovider> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: SizedBox(
+          height: 250,
+          child: Column(
+            children: [
+
+              Consumer<Addmoney>(builder: (context, money,child){
+                return Text(money.moneyvalue.toString(),style: TextStyle(fontSize: 30),);
+              }),
+
+              Text("24",style: TextStyle(fontSize: 30),),
+              SizedBox(height: 100,),
+              ElevatedButton(onPressed: (){
+                // Provider.of<Addmoney>(context,listen: false).increse();
+
+              }, child: Icon(Icons.add,size: 30,))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
