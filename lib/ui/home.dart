@@ -841,7 +841,7 @@ class _homeuiState extends State<homeui> {
                       ),
                     );
                   },
-                  icon: Icons.add,
+                  icon: Icons.add_rounded ,
                 ),
                 customebutton(
                   text1: 'Add',
@@ -859,7 +859,7 @@ class _homeuiState extends State<homeui> {
                       ),
                     );
                   },
-                  icon: Icons.payment,
+                  icon: Icons.payment_rounded,
                 ),
                 customebutton(
                   text1: 'View',
@@ -894,14 +894,24 @@ class _homeuiState extends State<homeui> {
                   },
                   icon: Icons.outlined_flag,
                 ),
-                customebutton(
-                  text1: 'View',
-                  text2: 'Transfer',
-                  onPressed: () {},
-                  icon: Icons.currency_exchange,
-                ),
+
               ],
             ),
+            SizedBox(height: 8),
+
+            // Row(
+            //   children: [
+            //     Padding(
+            //       padding: const EdgeInsets.only(left: 12.0),
+            //       child: customebutton(
+            //         text1: 'View',
+            //         text2: 'Transfer',
+            //         onPressed: () {},
+            //         icon: Icons.currency_exchange,
+            //       ),
+            //     ),
+            //   ],
+            // ),
 
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
@@ -2575,7 +2585,7 @@ class customebutton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         height: 96,
-        width: 56,
+        width: 76,
         decoration: BoxDecoration(
           // border: Border.all(
           //   color: Colors.white24,      // Border color
@@ -2587,12 +2597,27 @@ class customebutton extends StatelessWidget {
         ),
         child: Column(
           children: [
-            CircleAvatar(
-              radius: 18,
-              child: Icon(icon),
-              backgroundColor: Colors.white70,
+
+            Container(
+              width: 55.0,
+              height: 55.0,
+
+              alignment: Alignment.center,           // Center the child widget
+              decoration: BoxDecoration(
+                color: Colors.white24,                  // Background color (must be inside decoration!)
+                borderRadius: BorderRadius.circular(20), // Rounded corners
+
+
+              ),
+              child: Icon(icon,),
             ),
-            SizedBox(height: 6),
+
+            // CircleAvatar(
+            //   radius: 18,
+            //   child: Icon(icon),
+            //   backgroundColor: Colors.white70,
+            // ),
+            SizedBox(height: 5),
             SizedBox(
               height: 36,
               child: Column(
