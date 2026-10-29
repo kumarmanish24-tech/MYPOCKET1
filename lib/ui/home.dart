@@ -981,6 +981,95 @@ class _homeuiState extends State<homeui> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20, top: 0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Goal",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white70,
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(width: 100),
+                          GestureDetector(
+                            child: Text(
+                              "See All",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white38,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(width: 360,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            SizedBox(width: 8,),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 200.0,
+                                height: 120.0,
+
+                                alignment: Alignment.center,           // Center the child widget
+                                decoration: BoxDecoration(
+                                  color: Colors.white24,                  // Background color (must be inside decoration!)
+                                  borderRadius: BorderRadius.circular(20), // Rounded corners
+
+
+                                ),
+
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 200.0,
+                                height: 120.0,
+
+                                alignment: Alignment.center,           // Center the child widget
+                                decoration: BoxDecoration(
+                                  color: Colors.white24,                  // Background color (must be inside decoration!)
+                                  borderRadius: BorderRadius.circular(20), // Rounded corners
+
+
+                                ),
+
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: 200.0,
+                                height: 120.0,
+
+                                alignment: Alignment.center,           // Center the child widget
+                                decoration: BoxDecoration(
+                                  color: Colors.white24,                  // Background color (must be inside decoration!)
+                                  borderRadius: BorderRadius.circular(20), // Rounded corners
+
+
+                                ),
+
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 100,)
+
+
 
 
 
