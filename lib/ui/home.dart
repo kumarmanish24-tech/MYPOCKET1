@@ -641,320 +641,357 @@ class _homeuiState extends State<homeui> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8, top: 16),
-              child: Container(
-                width: double.infinity,
-                height: 110,
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(
-                    37,
-                    255,
-                    255,
-                    255,
-                  ), // Note: Color must be inside BoxDecoration when using decoration
-
-                  borderRadius: BorderRadius.circular(
-                    30.0,
-                  ), // Adjust the double value for more/less curve
-                ),
+            SizedBox(height: 420,
+              width: 360,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                            top: 5,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Icon(
-                                Icons.watch_later_outlined,
-                                size: 15,
-                                color: Colors.white54,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                "Daily Limit",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white54,
-                                  fontSize: 12,
-                                ),
-                              ),
 
-                              SizedBox(width: 115),
-                            ],
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, right: 8, top: 16),
+                      child: Container(
+                        width: double.infinity,
+                        height: 110,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(
+                            37,
+                            255,
+                            255,
+                            255,
+                          ), // Note: Color must be inside BoxDecoration when using decoration
+
+                          borderRadius: BorderRadius.circular(
+                            30.0,
+                          ), // Adjust the double value for more/less curve
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 20,
-                            right: 20,
-                            top: 10,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: 24,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                  color: Colors
-                                      .white60, // Note: Color must be inside BoxDecoration when using decoration
-
-                                  borderRadius: BorderRadius.circular(
-                                    20,
-                                  ), // Adjust the double value for more/less curve
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    "₹ 50 Left",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black87,
-                                      fontSize: 12,
-                                    ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 20,
+                                    right: 20,
+                                    top: 5,
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 10),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(width: 5),
-
-                                  Row(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
+                                      Icon(
+                                        Icons.watch_later_outlined,
+                                        size: 15,
+                                        color: Colors.white54,
+                                      ),
+                                      SizedBox(width: 5),
                                       Text(
-                                        "₹70",
+                                        "Daily Limit",
                                         style: TextStyle(
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.white60,
-                                          fontSize: 25,
+                                          color: Colors.white54,
+                                          fontSize: 12,
                                         ),
                                       ),
-                                      Text(
-                                        "/120",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white60,
-                                          fontSize: 15,
+
+                                      SizedBox(width: 115),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 20,
+                                    right: 20,
+                                    top: 10,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        height: 24,
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                          color: Colors
+                                              .white60, // Note: Color must be inside BoxDecoration when using decoration
+
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ), // Adjust the double value for more/less curve
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "₹ 50 Left",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black87,
+                                              fontSize: 12,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(width: 10),
-                                ],
-                              ),
-                              SizedBox(height: 5),
-                              SizedBox(
-                                width: 300,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: LinearProgressIndicator(
-                                    value: 0.6,
-                                    backgroundColor: Colors.white12,
-                                    color: Colors.white30,
-                                    minHeight: 8.0,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(width: 10),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SizedBox(width: 5),
+
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "₹70",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white60,
+                                                  fontSize: 25,
+                                                ),
+                                              ),
+                                              Text(
+                                                "/120",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: Colors.white60,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(width: 10),
+                                        ],
+                                      ),
+                                      SizedBox(height: 5),
+                                      SizedBox(
+                                        width: 300,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(8.0),
+                                          child: LinearProgressIndicator(
+                                            value: 0.6,
+                                            backgroundColor: Colors.white12,
+                                            color: Colors.white30,
+                                            minHeight: 8.0,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5),
+                                      Text(
+                                        "Resets at 12:00 AM",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white54,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Quick Action",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white70,
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(width: 130),
+                          GestureDetector(
+                            child: Text(
+                              "",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white38,
                               ),
-                              SizedBox(height: 5),
-                              Text(
-                                "Resets at 12:00 AM",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white54,
-                                  fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 8),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0,right: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          customebutton(
+                            text1: 'Add',
+                            text2: 'Money',
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation, secondaryAnimation) =>
+                                  const addmoney(),
+                                  transitionDuration:
+                                  Duration.zero, // Removes entry animation
+                                  reverseTransitionDuration:
+                                  Duration.zero, // Removes exit/back animation
                                 ),
+                              );
+                            },
+                            icon: Icons.add_rounded ,
+                          ),
+                          customebutton(
+                            text1: 'Add',
+                            text2: 'Expenses',
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation, secondaryAnimation) =>
+                                  const addexpence(),
+                                  transitionDuration:
+                                  Duration.zero, // Removes entry animation
+                                  reverseTransitionDuration:
+                                  Duration.zero, // Removes exit/back animation
+                                ),
+                              );
+                            },
+                            icon: Icons.payment_rounded,
+                          ),
+                          customebutton(
+                            text1: 'View',
+                            text2: 'Expenses',
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation, secondaryAnimation) =>
+                                  const DynamicSegmentedButtonExample(),
+                                  transitionDuration:
+                                  Duration.zero, // Removes entry animation
+                                  reverseTransitionDuration:
+                                  Duration.zero, // Removes exit/back animation
+                                ),
+                              );
+                            },
+                            icon: Icons.post_add,
+                          ),
+                          customebutton(
+                            text1: 'Set',
+                            text2: 'Goal',
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   PageRouteBuilder(
+                              //     pageBuilder: (context, animation, secondaryAnimation) =>  TakePictureScreen(),
+                              //     transitionDuration: Duration.zero,        // Removes entry animation
+                              //     reverseTransitionDuration: Duration.zero, // Removes exit/back animation
+                              //   ),
+                              // );
+                            },
+                            icon: Icons.outlined_flag,
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 8),
+
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: customebutton(
+                              text1: 'View',
+                              text2: 'Transfer',
+                              onPressed: () {},
+                              icon: Icons.currency_exchange,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: customebutton(
+                              text1: 'spilt',
+                              text2: 'Money',
+                              onPressed: () {},
+                              icon: Icons.call_split,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Latest Transactions",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white70,
+                              fontSize: 20,
+                            ),
+                          ),
+                          SizedBox(width: 100),
+                          GestureDetector(
+                            child: Text(
+                              "See All",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white38,
                               ),
-                            ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    SizedBox(height: 120,
+                      child: Expanded(
+                        child: Flexible(
+                          child: CardSwiper(
+                            backCardOffset: const Offset(0, -10),
+
+                            allowedSwipeDirection: const AllowedSwipeDirection.symmetric(
+                              horizontal: true,
+                            ),
+                            scale: 0.96,
+
+                            cardsCount: cards.length,
+                            cardBuilder:
+                                (context, index, percentThresholdX, percentThresholdY) =>
+                            cards[index],
                           ),
                         ),
-                      ],
+                      ),
                     ),
+
+
+
                   ],
                 ),
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Quick Action",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white70,
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(width: 130),
-                  GestureDetector(
-                    child: Text(
-                      "",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white38,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 8),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                customebutton(
-                  text1: 'Add',
-                  text2: 'Money',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const addmoney(),
-                        transitionDuration:
-                            Duration.zero, // Removes entry animation
-                        reverseTransitionDuration:
-                            Duration.zero, // Removes exit/back animation
-                      ),
-                    );
-                  },
-                  icon: Icons.add_rounded ,
-                ),
-                customebutton(
-                  text1: 'Add',
-                  text2: 'Expenses',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const addexpence(),
-                        transitionDuration:
-                            Duration.zero, // Removes entry animation
-                        reverseTransitionDuration:
-                            Duration.zero, // Removes exit/back animation
-                      ),
-                    );
-                  },
-                  icon: Icons.payment_rounded,
-                ),
-                customebutton(
-                  text1: 'View',
-                  text2: 'Expenses',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const DynamicSegmentedButtonExample(),
-                        transitionDuration:
-                            Duration.zero, // Removes entry animation
-                        reverseTransitionDuration:
-                            Duration.zero, // Removes exit/back animation
-                      ),
-                    );
-                  },
-                  icon: Icons.post_add,
-                ),
-                customebutton(
-                  text1: 'Set',
-                  text2: 'Goal',
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   PageRouteBuilder(
-                    //     pageBuilder: (context, animation, secondaryAnimation) =>  TakePictureScreen(),
-                    //     transitionDuration: Duration.zero,        // Removes entry animation
-                    //     reverseTransitionDuration: Duration.zero, // Removes exit/back animation
-                    //   ),
-                    // );
-                  },
-                  icon: Icons.outlined_flag,
-                ),
 
-              ],
-            ),
-            SizedBox(height: 8),
 
-            // Row(
-            //   children: [
-            //     Padding(
-            //       padding: const EdgeInsets.only(left: 12.0),
-            //       child: customebutton(
-            //         text1: 'View',
-            //         text2: 'Transfer',
-            //         onPressed: () {},
-            //         icon: Icons.currency_exchange,
-            //       ),
-            //     ),
-            //   ],
-            // ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Latest Transactions",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white70,
-                      fontSize: 20,
-                    ),
-                  ),
-                  SizedBox(width: 100),
-                  GestureDetector(
-                    child: Text(
-                      "See All",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white38,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            Flexible(
-              child: CardSwiper(
-                backCardOffset: const Offset(0, -10),
-
-                allowedSwipeDirection: const AllowedSwipeDirection.symmetric(
-                  horizontal: true,
-                ),
-                scale: 0.96,
-
-                cardsCount: cards.length,
-                cardBuilder:
-                    (context, index, percentThresholdX, percentThresholdY) =>
-                        cards[index],
-              ),
-            ),
           ],
         ),
       ),
